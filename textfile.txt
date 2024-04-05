@@ -1,0 +1,20 @@
+Map out
+
+For admin:
+There is an admin login. /admin/login with email: admin@admin.com and password: password.
+Admin can: 
+add, edit and delete books.
+create a student account.
+assign a book to a student.
+
+
+~~~~~~~
+
+For students:
+Students can:
+browse all books and their availability.
+view their profile.
+In student profile, a student can view: 
+their checked out books,
+their library use history,
+overdue books.

@@ -1,0 +1,41 @@
+# RewriteEngine On
+# RewriteBase /views/
+# RewriteRule ^index\\.php$ - [L]
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule . /views/index.php [L]
+
+
+
+
+
+# If the requested file or directory does not exist,
+# redirect everything to index.php
+
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule ^(.*)$ index.php [QSA,L]
+
+
+# RewriteEngine On
+
+# Internal redirection for /student/
+# RewriteRule ^profile/?$ views/user/profile.php [L]
+
+# Internal redirection for /about/
+# RewriteRule ^/?$ views/user/index.php [L]
+
+# Internal redirection for /admin/
+# RewriteRule ^admin/login?$ views/admin/admin_login.php
+# RewriteRule ^admin/?$ views/admin/index.php [L]
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
+
+RewriteRule ^admin/?$ views/admin/index.php [L]
+
+RewriteRule ^admin/(.*)$ views/admin/$1 [L]
+

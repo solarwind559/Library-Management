@@ -1,0 +1,11 @@
+<?php
+
+
+class FilesManager {
+    public static function rootDirectory() {
+        return dirname(__FILE__, 3);
+    }
+}
+
+$projectRoot = FilesManager::rootDirectory();
+echo "Project root directory: $projectRoot" . '<br>';
