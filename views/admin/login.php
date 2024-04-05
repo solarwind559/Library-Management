@@ -9,14 +9,7 @@
     <?php
 $page_title = "Admin Login";
 
-
 include_once('header.php');
-// include_once('..\config\db.php');
-include_once('../../config/db.php');
-// include_once('../../config/root_dir.php');
-// $projectRoot = FilesManager::rootDirectory();
-// echo "Project root directory: $projectRoot" . '<br>';
-
 
 include_once('../../app/Model/AdminValidator.php');
 

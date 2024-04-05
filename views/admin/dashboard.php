@@ -21,9 +21,6 @@ $from_record_num = ($records_per_page * $page) - $records_per_page;
 $page_title = "Browse Books";
 include_once('header.php');
 
-include_once '../../config/db.php';
-include_once '../../app/Model/Book.php';
-include_once '../../app/Model/Category.php';
 include_once '../../src/admin/delete_book.php';
 
 // get database connection

@@ -10,13 +10,16 @@
 </head>
 <body>
     <?php
-    // include_once('../../config/root_dir.php');
-    // $projectRoot = FilesManager::rootDirectory();
-    // $imagePath = $projectRoot . '/public/assets/img/Vector_Book_blue.svg';
+include_once('../../config/db.php');
+include_once('../../app/Model/Book.php');
+include_once('../../app/Model/Category.php');
+
+
+
     $currentFile = basename($_SERVER['PHP_SELF']);
 
-    $imagePathLogin = '<img src="../public/assets/img/Vector_Book_blue.svg" alt="logo">';
-    $imagePathOther = '<img src="../../public/assets/img/Vector_Book_blue.svg" alt="logo">';
+    // $imagePathLogin = '<img src="../public/assets/img/Vector_Book_blue.svg" alt="logo">';
+    // $imagePathOther = '<img src="../../public/assets/img/Vector_Book_blue.svg" alt="logo">';
 
     ?>
 
@@ -25,12 +28,14 @@
         <div class="row">
             <div class="col-8 py-3">
                 <?php
-                if ($currentFile === 'login.php'){
-                   echo $imagePathLogin;        
+                // if ($currentFile === 'login.php'){
+                //    echo $imagePathLogin;        
 
-                } else {
-                    echo $imagePathOther;            
-                } ?>
+                // } else {
+                //     echo $imagePathOther;            
+                // } 
+                ?>
+                <a href="dashboard"><img src="../../public/assets/img/Vector_Book_blue.svg" alt="logo"></a>             
             </div>
             <?php
                 $currentFile = basename($_SERVER['PHP_SELF']);

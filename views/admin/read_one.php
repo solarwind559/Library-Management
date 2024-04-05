@@ -1,11 +1,8 @@
 <?php
+$page_title = "View Book Info";
+include_once('header.php');
 // get ID of the book to be edited
 $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
-  
-// include database and object files
-include_once('../../config/db.php');
-include_once('../../app/Model/Book.php');
-include_once('../../app/Model/Category.php');
 
 // get database connection
 $database = new Database();
@@ -21,9 +18,6 @@ $book->id = $id;
 // read the details of book to be edited
 $book->readOne(); 
 
-$page_title = "Add Books";
-include_once('header.php');
-  
 ?>
 
 <?php

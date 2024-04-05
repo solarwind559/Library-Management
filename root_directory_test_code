@@ -6,6 +6,6 @@ class FilesManager {
         return dirname(__FILE__, 3);
     }
 }
-
+//use:
 $projectRoot = FilesManager::rootDirectory();
 echo "Project root directory: $projectRoot" . '<br>';

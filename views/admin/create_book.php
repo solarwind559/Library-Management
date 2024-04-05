@@ -1,9 +1,6 @@
 <?php
 $page_title = "Add Books";
-include_once('../resources/templates/header.php');
-include_once '../src/config/db.php';
-include_once '../src/Model/Book.php';
-include_once '../src/Model/Category.php';
+include_once('header.php');
 
 // get database connection
 $database = new Database();
@@ -13,6 +10,16 @@ $db = $database->getConnection();
 $book = new Book($db);
 $category = new Category($db);
 
+?>
+
+<?php
+    // Check if the HTTP_REFERER is set
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        $referrer = $_SERVER['HTTP_REFERER'];
+        echo '<a href="' . $referrer . '"><button>Go Back</button></a><br><br>';
+    } else {
+        echo 'No referrer found.';
+    }
 ?>
 
 <?php 
@@ -78,6 +85,6 @@ if($_POST){
     </form>
 
 <?php
-include_once('../resources/templates/footer.php');
+include_once('../partials/footer.php');
 ?>
 
