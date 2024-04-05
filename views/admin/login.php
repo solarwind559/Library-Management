@@ -13,6 +13,9 @@ $page_title = "Admin Login";
 include_once('header.php');
 // include_once('..\config\db.php');
 include_once('../../config/db.php');
+// include_once('../../config/root_dir.php');
+// $projectRoot = FilesManager::rootDirectory();
+// echo "Project root directory: $projectRoot" . '<br>';
 
 
 include_once('../../app/Model/AdminValidator.php');
@@ -39,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($admin_id) {
             // User is authenticated, set session variable
             $_SESSION['admin_id'] = $admin_id;
-            header('Location: index.php'); // Redirect to the protected page
+            header('Location: dashboard'); // Redirect to the protected page
             exit();
         } else {
             echo "Invalid login credentials.";

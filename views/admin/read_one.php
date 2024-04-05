@@ -3,9 +3,9 @@
 $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
   
 // include database and object files
-include_once '../../config/db.php';
-include_once '../../app/Model/Book.php';
-include_once '../../app/Model/Category.php';
+include_once('../../config/db.php');
+include_once('../../app/Model/Book.php');
+include_once('../../app/Model/Category.php');
 
 // get database connection
 $database = new Database();
@@ -23,9 +23,6 @@ $book->readOne();
 
 $page_title = "Add Books";
 include_once('header.php');
-include_once '../../config/db.php';
-include_once '../../app/Model/Book.php';
-include_once '../../app/Model/Category.php';
   
 ?>
 
@@ -37,7 +34,7 @@ include_once '../../app/Model/Category.php';
     } else {
         echo 'No referrer found.';
     }
-    ?>
+?>
 
 <?php
 // HTML table for displaying a book details

@@ -12,7 +12,7 @@ session_destroy();
 
 // Redirect to the login page (adjust the URL as needed)
 // header('Location: /library-management/admin/admin_login.php');
-header('Location: /library-management/admin/');
+header('Location: ../../views/admin/login');
 
 exit();
 ?>

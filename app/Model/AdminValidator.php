@@ -40,7 +40,7 @@ class AdminValidator {
         session_unset();
         session_destroy();
         // Redirect to the login page (adjust the URL as needed)
-        header('Location: admin_login.php');
+        header('Location: login.php');
         exit();
     }
 }

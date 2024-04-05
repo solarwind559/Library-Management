@@ -2,10 +2,9 @@
 // get ID of the book to be edited
 $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
   
-// include database and object files
-include_once '../src/config/db.php';
-include_once '../src/Model/Book.php';
-include_once '../src/Model/Category.php';
+include_once('../../config/db.php');
+include_once('../../app/Model/Book.php');
+include_once('../../app/Model/Category.php');
 
 // get database connection
 $database = new Database();
@@ -22,16 +21,19 @@ $book->id = $id;
 $book->readOne(); 
 
 $page_title = "Add Books";
-include_once('../resources/templates/header.php');
-include_once '../src/config/db.php';
-include_once '../src/Model/Book.php';
-include_once '../src/Model/Category.php';
+include_once('header.php');
 
-echo "<div class='right-button-margin'>
-          <a href='index.php' class='btn btn-default pull-right'>Read books</a>
-     </div>";
-  
 ?>
+<?php
+    // Check if the HTTP_REFERER is set
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        $referrer = $_SERVER['HTTP_REFERER'];
+        echo '<a href="' . $referrer . '"><button>Go Back</button></a><br><br>';
+    } else {
+        echo 'No referrer found.';
+    }
+?>
+
 <?php 
 // if the form was submitted
 if($_POST){
@@ -107,5 +109,3 @@ if($_POST){
     
         </table>
     </form>    
-
-<?php include_once('../resources/templates/footer.php');?>
