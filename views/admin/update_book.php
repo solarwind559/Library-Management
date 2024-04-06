@@ -43,7 +43,7 @@ if($_POST){
     // update the book
     if($book->update()){
         echo "<div class='alert alert-success alert-dismissable'>
-            book was updated.
+            The book has been updated.
         </div>";
     }
   

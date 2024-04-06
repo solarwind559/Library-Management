@@ -41,6 +41,7 @@ include_once('../../app/Model/Category.php');
                 $currentFile = basename($_SERVER['PHP_SELF']);
                 if ($currentFile !== 'login.php') {
                     echo '<div class="col-4 my-auto text-end">';
+                    echo '<a href="register_user.php">Add New User</a> ';
                     echo '<a href="../../src/admin/admin_logout.php">Log Out</a>';
                     echo '</div>';
                 };

@@ -88,7 +88,7 @@ else{
 ?>
 
 <?php
-// $page_url = "dashboard.php?";
+//$page_url = "dashboard.php?";
 $page_url = "?";
 $total_rows = $book->countAll();
 include_once('../../pagination.php');
