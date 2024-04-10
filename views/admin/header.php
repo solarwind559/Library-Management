@@ -26,7 +26,7 @@ include_once('../../app/Model/Category.php');
 <header style="">
     <div class="container">
         <div class="row">
-            <div class="col-8 py-3">
+            <div class="col-6 py-3">
                 <?php
                 // if ($currentFile === 'login.php'){
                 //    echo $imagePathLogin;        
@@ -40,10 +40,11 @@ include_once('../../app/Model/Category.php');
             <?php
                 $currentFile = basename($_SERVER['PHP_SELF']);
                 if ($currentFile !== 'login.php') {
-                    echo '<navbar class="col-4 my-auto text-end"><ul>';
-                    echo '<li><a href="register_user.php">Add New User</a></li> ';
-                    echo '<li><a href="user_list.php">User List</a></li> ';
-                    echo '<li><a href="../../src/admin/admin_logout.php">Log Out</a></li>';
+                    echo '<navbar class="col-6 my-auto text-end"><ul class="nav justify-content-end">';
+                    echo '<li class="nav-item"><a class="nav-link" href="borrowed_books.php">Book Borrowing</a></li> ';
+                    echo '<li class="nav-item"><a class="nav-link" href="user_list.php">User List</a></li> ';
+                    echo '<li class="nav-item"><a class="nav-link active" href="register_user.php">Add New User</a></li> ';
+                    echo '<li class="nav-item"><a class="nav-link" href="../../src/admin/admin_logout.php">Log Out</a></li>';
                     echo '</ul></navbar>';
                 };
             ?>

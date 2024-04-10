@@ -45,7 +45,7 @@ if (isset($_POST['user_id']) && isset($_POST['book_id'])) {
         <div class="row">
             <div class="col-6">
             <?php 
-                echo "<select id='user_select' name='user_id' required class='btn btn-light w-100'>";
+                echo "<select id='user_select' name='user_id' required class='btn btn-outline-primary w-100'>";
                 echo "<option value=''>Select a user...</option>";
 
                 while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
@@ -58,7 +58,7 @@ if (isset($_POST['user_id']) && isset($_POST['book_id'])) {
             </div>
             <div class="col-6">
             <?php 
-                echo "<select id='book_select' name='book_id' required class='btn btn-light w-100'>";
+                echo "<select id='book_select' name='book_id' required class='btn btn-outline-primary w-100'>";
                 echo "<option value=''>Select a book...</option>";
 
                 while ($row = $stmt3->fetch(PDO::FETCH_ASSOC)) {
@@ -70,21 +70,21 @@ if (isset($_POST['user_id']) && isset($_POST['book_id'])) {
             ?>
             </div>
         </div><!--.row-->
-        <input type="submit" value="Assign Book" class="btn btn-primary d-block mx-auto mt-4 mb-5">
+        <input type="submit" value="Assign Book" class="btn btn-primary d-block mx-auto my-4">
     </form>    
 </div><!--.container -->
 
 <?php
     if ($stmt->rowCount() > 0) {
         echo "<table class='table table-striped'>";
-        echo "<tr scope='row' class='table-dark'><th>Borrowed Book</th><th>Borrowed by</th><th>Borrow Date</th><th>Return Date</th></tr>";
-        echo "<tr scope='row' class='table-primary'><th>Book Title:</th><th>Full Name:</th><th></th><th></th></tr>";
+        echo "<tr scope='row' class='table-dark'><th>Borrowed Book:</th><th>Borrowed by:</th><th>Borrow Date:</th><th>Return Date:</th><th></th></tr>";
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo "<tr scope='row'>";
             echo "<td>" . $row['title'] . "</td>";
             echo "<td>" . $row['full_name'] . "</td>";
             echo "<td>" . $row['borrow_date'] . "</td>";
             echo "<td>" . $row['return_date'] . "</td>";
+            echo "<td> <button class='btn btn-outline-success'>Book Returned</button></td>";
             echo "</tr>";
         }
         echo "</table>";
