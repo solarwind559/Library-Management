@@ -11,7 +11,7 @@ $page_title = "Admin Login";
 
 include_once('header.php');
 
-include_once('../../app/Model/AdminValidator.php');
+include_once('../../app/Controller/AdminController.php');
 
 // login.php
 
@@ -24,7 +24,7 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $database = new Database();
     $db = $database->getConnection();
-    $auth = new AdminValidator($db);
+    $auth = new AdminController($db);
 
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Example logout process (logout.php)
 if (isset($_GET['logout'])) {
-   AdminValidator::logout(); // Call the logout method
+   AdminController::logout(); // Call the logout method
 }
 
 

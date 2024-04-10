@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $page_title; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../public/assets/css/main.css">
+    <link rel="stylesheet" href="../../public/assets/css/main.css">
 
 </head>
 <body>
@@ -40,10 +40,11 @@ include_once('../../app/Model/Category.php');
             <?php
                 $currentFile = basename($_SERVER['PHP_SELF']);
                 if ($currentFile !== 'login.php') {
-                    echo '<div class="col-4 my-auto text-end">';
-                    echo '<a href="register_user.php">Add New User</a> ';
-                    echo '<a href="../../src/admin/admin_logout.php">Log Out</a>';
-                    echo '</div>';
+                    echo '<navbar class="col-4 my-auto text-end"><ul>';
+                    echo '<li><a href="register_user.php">Add New User</a></li> ';
+                    echo '<li><a href="user_list.php">User List</a></li> ';
+                    echo '<li><a href="../../src/admin/admin_logout.php">Log Out</a></li>';
+                    echo '</ul></navbar>';
                 };
             ?>
 

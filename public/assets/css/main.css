@@ -4,4 +4,8 @@ header {
 
 h1 {
   font-size: 2rem;
+}
+
+navbar a {
+  margin-right: 15px;
 }/*# sourceMappingURL=main.css.map */

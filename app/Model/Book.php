@@ -10,6 +10,7 @@ class Book{
     public $title;
     public $author;
     public $category_id;
+    public $status;
     public $timestamp;
   
     public function __construct($db){
@@ -23,7 +24,7 @@ class Book{
         $query = "INSERT INTO
                     " . $this->table_name . "
                 SET
-                    title=:title, author=:author, category_id=:category_id, created=:created";
+                    title=:title, author=:author, category_id=:category_id, created=:created, status=:status";
   
         $stmt = $this->conn->prepare($query);
   
@@ -31,6 +32,8 @@ class Book{
         $this->title=htmlspecialchars(strip_tags($this->title));
         $this->author=htmlspecialchars(strip_tags($this->author));
         $this->category_id=htmlspecialchars(strip_tags($this->category_id));
+        $this->status=htmlspecialchars(strip_tags($this->status));
+
   
         // to get time-stamp for 'created' field
         $this->timestamp = date('Y-m-d H:i:s');
@@ -39,6 +42,7 @@ class Book{
         $stmt->bindParam(":title", $this->title);
         $stmt->bindParam(":author", $this->author);
         $stmt->bindParam(":category_id", $this->category_id);
+        $stmt->bindParam(":status", $this->status);
         $stmt->bindParam(":created", $this->timestamp);
   
         if($stmt->execute()){
@@ -52,7 +56,7 @@ class Book{
     function readAll($from_record_num, $records_per_page){
   
         $query = "SELECT
-                    id, title, author, category_id
+                    id, title, author, category_id, status
                 FROM
                     " . $this->table_name . "
                 ORDER BY
@@ -82,7 +86,7 @@ class Book{
     function readOne(){
     
         $query = "SELECT
-                    id, title, author, category_id
+                    id, title, author, category_id, status
                 FROM
                     " . $this->table_name . "
                 WHERE
@@ -99,6 +103,8 @@ class Book{
         $this->title = $row['title'];
         $this->author = $row['author'];
         $this->category_id = $row['category_id'];
+        $this->status = $row['status'];
+
     }
 
     function update(){
@@ -108,7 +114,9 @@ class Book{
                 SET
                     title = :title,
                     author = :author,
-                    category_id  = :category_id
+                    category_id  = :category_id,
+                    status  = :status
+
                 WHERE
                     id = :id";
       
@@ -119,12 +127,16 @@ class Book{
         $this->author=htmlspecialchars(strip_tags($this->author));
         $this->category_id=htmlspecialchars(strip_tags($this->category_id));
         $this->id=htmlspecialchars(strip_tags($this->id));
+        $this->id=htmlspecialchars(strip_tags($this->status));
+
       
         // bind parameters
         $stmt->bindParam(':title', $this->title);
         $stmt->bindParam(':author', $this->author);
         $stmt->bindParam(':category_id', $this->category_id);
         $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':status', $this->status);
+
       
         // execute the query
         if($stmt->execute()){

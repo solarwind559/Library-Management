@@ -42,6 +42,7 @@ if($num>0){
             echo "<th>Title</th>";
             echo "<th>Author</th>";
             echo "<th>Category</th>";
+            echo "<th>Status</th>";
             echo "<th>Actions</th>";
             
         echo "</tr>";
@@ -58,6 +59,7 @@ if($num>0){
                     $category->readName();
                     echo $category->name;
                 echo "</td>";
+                echo "<td>{$status}</td>";
 
                 echo "<td>";
 

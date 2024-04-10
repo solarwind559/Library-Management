@@ -18,7 +18,7 @@ $book->id = $id;
 // read the details of book to be edited
 $book->readOne(); 
 
-
+$status = $book->status;
 
 ?>
 <?php
@@ -49,6 +49,26 @@ if($_POST){
   
     // if unable to update the book, tell the user
     else{
+        echo "<div class='alert alert-danger alert-dismissable'>
+            Unable to update book.
+        </div>";
+    }
+}
+
+
+$status = $book->status; // Example value (replace with your actual value)
+
+// Toggle the value when the button is clicked
+if (isset($_POST['toggle'])) {
+    $status = ($status == 1) ? 0 : 1;
+    // Update the book status (you need to implement this logic)
+    // Example: $book->status = $status;
+    // Then call your existing update method:
+    if ($book->update()) {
+        echo "<div class='alert alert-success alert-dismissable'>
+            The book has been updated.
+        </div>";
+    } else {
         echo "<div class='alert alert-danger alert-dismissable'>
             Unable to update book.
         </div>";
@@ -95,6 +115,22 @@ if($_POST){
                     echo "</select>";
                     ?>
                 </td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td><?php 
+
+                echo $status;
+
+                ?>
+                        <!-- Hidden input field to store the current status -->
+        <input type="hidden" name="status" value="<?php echo $status; ?>" />
+
+        <!-- Toggle button -->
+        <button type="button" name="toggle">
+            <?php echo ($status == 1) ? 'Turn Off' : 'Turn On'; ?>
+        </button>
+
             </tr>
     
             <tr>

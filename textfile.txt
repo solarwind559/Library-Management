@@ -8,6 +8,13 @@ create a student account.
 assign a book to a student.
 
 
+users table
+books table
+borrowed_books table
+
+page to browse all books, with status available/unavailable
+-----------------------------------------------/depending on borrowed books table 
+
 ~~~~~~~
 
 For students:
@@ -18,3 +25,7 @@ In student profile, a student can view:
 their checked out books,
 their library use history,
 overdue books.
+
+
+
+
