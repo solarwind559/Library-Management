@@ -35,6 +35,8 @@ $category = new Category($db);
 $stmt = $book->readAll($from_record_num, $records_per_page);
 $num = $stmt->rowCount();
 
+
+
 if($num>0){
   
     echo "<table class='table table-hover table-responsive table-bordered'>";
@@ -50,6 +52,8 @@ if($num>0){
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
   
             extract($row);
+
+            $status_message = ($status == 1) ? "<b style='color:#dc3545;'>Borrowed</b>" : "<b style='color:#198754;'>Available</b>";
   
             echo "<tr>";
                 echo "<td><a href='read_one.php?id={$id}'>{$title}</a></td>";
@@ -59,7 +63,7 @@ if($num>0){
                     $category->readName();
                     echo $category->name;
                 echo "</td>";
-                echo "<td>{$status}</td>";
+                echo "<td>{$status_message}</td>";
 
                 echo "<td>";
 

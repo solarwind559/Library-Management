@@ -48,7 +48,6 @@ echo "<table class='table table-hover table-responsive table-bordered'>
     <tr>
         <td>Category</td>
         <td>";
-            // display category name
             $category->id=$book->category_id;
             $category->readName();
             echo $category->name;

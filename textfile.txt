@@ -3,15 +3,13 @@ Map out
 For admin:
 There is an admin login. /admin/login with email: admin@admin.com and password: password.
 Admin can: 
+
+done:
 add, edit and delete books.
 create a student account.
 assign a book to a student.
 
-
-users table
-books table
-borrowed_books table
-
+to do:
 page to browse all books, with status available/unavailable
 -----------------------------------------------/depending on borrowed books table 
 

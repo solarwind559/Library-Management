@@ -14,7 +14,10 @@
 <script>
     function confirmDelete() {
         return confirm("Are you sure you want to delete this record?");
-        console.log('function called');
+    }
+
+    function confirmBookReturn() {
+        return confirm("Please confirm that this book was returned.");
     }
 </script>
 

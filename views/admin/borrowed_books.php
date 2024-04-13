@@ -20,6 +20,7 @@ $page_title = "Book Borrowing";
 include_once('header.php');
 include_once('../../app/Controller/BookController.php');
 include_once('../../app/Controller/UserController.php');
+// include_once '../../src/admin/return_book.php';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -41,15 +42,15 @@ if (isset($_POST['user_id']) && isset($_POST['book_id'])) {
 ?>
 
 <div class="container mt-3">
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" id="assign-form">
         <div class="row">
             <div class="col-6">
             <?php 
                 echo "<select id='user_select' name='user_id' required class='btn btn-outline-primary w-100'>";
                 echo "<option value=''>Select a user...</option>";
 
-                while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-                    extract($row);
+                while($row_user = $stmt2->fetch(PDO::FETCH_ASSOC)){
+                    extract($row_user);
                     echo "<option value='$id'>$name $surname ($email)</option>";
                 }
 
@@ -57,13 +58,26 @@ if (isset($_POST['user_id']) && isset($_POST['book_id'])) {
             ?>
             </div>
             <div class="col-6">
-            <?php 
+            <?php   
+
                 echo "<select id='book_select' name='book_id' required class='btn btn-outline-primary w-100'>";
                 echo "<option value=''>Select a book...</option>";
 
-                while ($row = $stmt3->fetch(PDO::FETCH_ASSOC)) {
-                    extract($row);
-                    echo "<option value='$id'>$title ($author)</option>";
+                $foundRecords = false; // Initialize a flag
+
+                while ($row_book = $stmt3->fetch(PDO::FETCH_ASSOC)) {               
+                     $status = $row_book['status'];
+
+                    if ($status === 0) {
+                        
+                        extract($row_book);
+                        echo "<option value='$id'>$title ($author)</option>";
+                        $foundRecords = true; // Set the flag to true
+                    }
+                }
+                
+                if (!$foundRecords) {
+                    echo "<option value=''>No books available.</option>";
                 }
 
                 echo "</select>";
@@ -75,23 +89,60 @@ if (isset($_POST['user_id']) && isset($_POST['book_id'])) {
 </div><!--.container -->
 
 <?php
-    if ($stmt->rowCount() > 0) {
-        echo "<table class='table table-striped'>";
-        echo "<tr scope='row' class='table-dark'><th>Borrowed Book:</th><th>Borrowed by:</th><th>Borrow Date:</th><th>Return Date:</th><th></th></tr>";
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            echo "<tr scope='row'>";
-            echo "<td>" . $row['title'] . "</td>";
-            echo "<td>" . $row['full_name'] . "</td>";
-            echo "<td>" . $row['borrow_date'] . "</td>";
-            echo "<td>" . $row['return_date'] . "</td>";
-            echo "<td> <button class='btn btn-outline-success'>Book Returned</button></td>";
-            echo "</tr>";
-        }
-        echo "</table>";
-    } else {
-        echo "No borrowed books found.";
-    }
+    // if ($stmt->rowCount() > 0) {
+    //     echo "<table class='table table-striped'>";
+    //     echo "<tr scope='row' class='table-dark'><th>Borrowed Book:</th><th>Borrowed by:</th><th>Borrow Date:</th><th>Return Date:</th><th></th></tr>";
+    //     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    //         echo "<tr scope='row'>";
+    //         echo "<td>" . $row['title'] . "</td>";
+    //         echo "<td>" . $row['full_name'] . "</td>";
+    //         echo "<td>" . $row['borrow_date'] . "</td>";
+    //         echo "<td>" . $row['return_date'] . "</td>";
+    //         echo "<td> <a href='../../app/Controller/BookController.php?id={$id}' class='btn btn-outline-success'>Book Returned</a></td>";
+    //         echo "</tr>";
+    //     }
+    //     echo "</table>";
+    // } else {
+    //     echo "No borrowed books found.";
+    // }
+
+
 ?>
+
+<?php
+if ($stmt->rowCount() > 0) {
+
+    if (isset($_GET['success']) && $_GET['success'] == 1) {
+        echo "<div class='alert alert-success' role='alert'>
+            Book was returned successfully.
+        </div>";
+    }
+
+    echo "<table class='table table-striped'>";
+    echo "<tr scope='row' class='table-dark'><th>Borrowed Book:</th><th>Borrowed by:</th><th>Borrow Date:</th><th>Return Date:</th><th></th></tr>";
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        extract($row); // Extract the values from the fetched row
+
+        echo "<tr scope='row'>";
+        echo "<td>{$title}</td>";
+        echo "<td>{$full_name}</td>";
+        echo "<td>{$borrow_date}</td>";
+        echo "<td>{$return_date}</td>";
+        echo "<td>
+            <form action='../../src/admin/return_book.php' method='post' id='return-form'>
+                <input type='hidden' name='return-form' value='return-form'>
+                <input type='hidden' name='book_id' value='{$book_id}'>
+                <button class='btn btn-outline-success' type='submit' value='confirmBookReturn();'>Book Returned</button>
+            </form>
+        </td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+} else {
+    echo "No borrowed books found.";
+}
+?>
+
 
 <?php
 

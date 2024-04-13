@@ -119,17 +119,11 @@ if (isset($_POST['toggle'])) {
             <tr>
                 <td>Status</td>
                 <td><?php 
+                $status_message = ($status == 1) ? "<b style='color:#dc3545;'>Borrowed</b>" : "<b style='color:#198754;'>Available</b>";
 
-                echo $status;
+                echo $status_message;
 
                 ?>
-                        <!-- Hidden input field to store the current status -->
-        <input type="hidden" name="status" value="<?php echo $status; ?>" />
-
-        <!-- Toggle button -->
-        <button type="button" name="toggle">
-            <?php echo ($status == 1) ? 'Turn Off' : 'Turn On'; ?>
-        </button>
 
             </tr>
     
