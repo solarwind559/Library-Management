@@ -17,7 +17,11 @@ if (isset($_POST['book_id'])) {
         Book was returned successfully.
     </div>";
         // header("Location: {$_SERVER['HTTP_REFERER']}");
-        header("Location: {$_SERVER['HTTP_REFERER']}?success=1");
+        // header("Location: {$_SERVER['HTTP_REFERER']}?success=1");
+
+        // Redirect to a success page or any other desired URL
+        $redirectUrl = $_SERVER['HTTP_REFERER'] . '?success=1'; // Example: Redirect back to the referring page
+        header("Location: $redirectUrl");
         exit;
     } else {
         echo "Error while returning the book.";

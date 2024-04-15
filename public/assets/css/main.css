@@ -8,4 +8,38 @@ h1 {
 
 .table-dark {
   height: 55px;
+}
+
+.user-button,
+.book-button {
+  height: 45px;
+  border-radius: 0;
+}
+.user-button:focus,
+.book-button:focus {
+  box-shadow: none !important;
+}
+.user-button:hover,
+.book-button:hover {
+  background-color: #9EC5FE;
+}
+.user-button:active,
+.book-button:active {
+  background-color: #6BA6FD;
+}
+
+.clicked-button {
+  box-sizing: border-box;
+  background-color: #9EC5FE;
+  color: #fff;
+}
+
+.table-custom td {
+  padding: 0;
+  margin: 5px;
+}
+
+navbar ul {
+  list-style: none;
+  font-weight: 500;
 }/*# sourceMappingURL=main.css.map */

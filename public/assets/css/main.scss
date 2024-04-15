@@ -1,3 +1,5 @@
+$light-blue: #9EC5FE;
+
 header {
     // padding: 20px;
     box-shadow: 5px 5px 25px 0px rgb(213, 213, 213);
@@ -10,4 +12,39 @@ h1 {
 
 .table-dark {
     height: 55px;
+}
+
+.user-button,
+.book-button {
+    height: 45px;
+    border-radius: 0;
+    &:focus {
+        box-shadow: none !important;
+    }
+    &:hover {
+        background-color: $light-blue;
+    }
+    &:active {
+                background-color:#6BA6FD;
+
+    }
+}
+.clicked-button {
+    box-sizing: border-box;
+    background-color:$light-blue;
+    color: #fff;
+}
+
+.table-custom {
+    td {
+        padding: 0;
+        margin: 5px;
+    }
+}
+
+navbar {
+    ul {
+        list-style: none;
+        font-weight: 500;
+    }
 }

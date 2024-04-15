@@ -40,13 +40,18 @@ include_once('../../app/Model/Category.php');
             <?php
                 $currentFile = basename($_SERVER['PHP_SELF']);
                 if ($currentFile !== 'login.php') {
-                    echo '<navbar class="col-6 my-auto text-end"><ul class="nav justify-content-end">';
-                    echo '<li class="nav-item"><a class="nav-link" href="borrowed_books.php">Book Borrowing</a></li> ';
+                    echo '<navbar class="col-6 my-auto text-end d-flex"><ul class="nav justify-content-end">';
+                    echo '<li class="nav-item"><a class="nav-link" href="assign_book_to_user.php">Book Borrowing</a></li> ';
+                    echo '</ul>';
+                    echo '<ul>';
+                    echo '<li class="nav-item"><a class="nav-link" href="borrowed_books.php">Borrowed Book List</a></li> ';
                     echo '<li class="nav-item"><a class="nav-link" href="user_list.php">User List</a></li> ';
+                    echo '</ul>';
+                    echo '<ul>';
                     echo '<li class="nav-item"><a class="nav-link active" href="register_user.php">Add New User</a></li> ';
                     echo '<li class="nav-item"><a class="nav-link" href="../../src/admin/admin_logout.php">Log Out</a></li>';
                     echo '</ul></navbar>';
-                };
+                }
             ?>
 
         </div>

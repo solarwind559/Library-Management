@@ -48,6 +48,7 @@ class BookController{
             echo "<div class='alert alert-success alert-dismissable'>
             The book has been borrowed.
             </div><br>";
+            echo "<meta http-equiv='refresh' content='5;assign_book_to_user.php'>";
         } catch (Exception $e) {
             echo "Error borrowing book: " . $e->getMessage() . "<br>";
         }
