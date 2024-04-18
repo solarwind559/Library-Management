@@ -8,20 +8,10 @@ if (!isset($_SESSION['admin_id'])) {
     header('Location: login');
     exit();
 }
-
-// page given in URL parameter, default page is one
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
   
-// set number of records per page
-$records_per_page = 7;
-  
-// calculate for the query LIMIT clause
-$from_record_num = ($records_per_page * $page) - $records_per_page;
-  
-$page_title = "Browse Books";
+$page_title = "Librarian Dashboard";
 include_once('header.php');
-
-include_once '../../src/admin/delete_book.php';
+include_once('../../app/Controller/UserController.php');
 
 // get database connection
 $database = new Database();
@@ -30,75 +20,37 @@ $db = $database->getConnection();
 // pass connection to objects
 $book = new Book($db);
 $category = new Category($db);
+$user = new UserController($db);
 
-// query books
-$stmt = $book->readAll($from_record_num, $records_per_page);
-$num = $stmt->rowCount();
+// fetch the number of records in database
+$bookCount = $book->countAll();
+$userCount = $user->countAll();
 
-
-
-if($num>0){
-  
-    echo "<table class='table table-hover table-responsive table-bordered'>";
-        echo "<tr>";
-            echo "<th>Title</th>";
-            echo "<th>Author</th>";
-            echo "<th>Category</th>";
-            echo "<th>Status</th>";
-            echo "<th>Actions</th>";
-            
-        echo "</tr>";
-  
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-  
-            extract($row);
-
-            $status_message = ($status == 1) ? "<b style='color:#dc3545;'>Borrowed</b>" : "<b style='color:#198754;'>Available</b>";
-  
-            echo "<tr>";
-                echo "<td><a href='read_one.php?id={$id}'>{$title}</a></td>";
-                echo "<td>{$author}</td>";
-                echo "<td>";
-                    $category->id = $category_id;
-                    $category->readName();
-                    echo $category->name;
-                echo "</td>";
-                echo "<td>{$status_message}</td>";
-
-                echo "<td>";
-
-                    echo "<a href='read_one.php?id={$id}' class='btn btn-primary left-margin'>
-                    View
-                    </a>
-
-                    <a href='update_book.php?id={$id}' class='btn btn-info left-margin'>
-                    Edit
-                    </a>
-
-                    <a href='../../src/admin/delete_book.php?id={$id}' class='btn btn-danger delete-object' onclick='return confirmDelete();'>
-                    Delete
-                    </a>";
-                echo "</td>";
-  
-            echo "</tr>";
-        }
-    echo "</table>";
-  
-    // paging buttons will be here
-}
-  
-// tell the user there are no books
-else{
-    echo "<div class='alert alert-info'>No books found.</div>";
-}
 ?>
 
-<?php
-//$page_url = "dashboard.php?";
-$page_url = "?";
-$total_rows = $book->countAll();
-include_once('../../pagination.php');
-//include the script
-include_once('../partials/footer.php');
-?>
+<h2 class="text-center mt-4">Current library statistics</h2>
+
+<div class="d-flex justify-content-around py-5">
+
+    <div class="icon text-center"><a href="book_list">
+        <?php include_once('../../public/assets/img/book_icon.svg'); ?>    
+        <p class="span-number mt-3"> [ <?php echo $bookCount; ?> ]</p>
+        <p>books</p></a>
+    </div>
+
+    <div class="icon text-center"><a href="user_list">
+    <?php include_once('../../public/assets/img/users_icon.svg'); ?>    
+        <p class="span-number mt-3"> [ <?php echo $userCount; ?> ] </p>
+        <p>users</p></a>
+    </div>
+
+    <div class="icon text-center"><a href="borrowed_books">
+    <?php include_once('../../public/assets/img/exclamation_icon.svg'); ?>    
+        <p class="span-number mt-3"> [ 0 ] </p>
+        <p>overdue books</p></a>
+    </div>
+
+</div>
+
+<?php include_once('../partials/footer.php');?>
 

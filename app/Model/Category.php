@@ -30,18 +30,25 @@ class Category{
     }
 
     // used to read category name by its ID
-function readName(){
-      
-    $query = "SELECT name FROM " . $this->table_name . " WHERE id = ? limit 0,1";
-  
-    $stmt = $this->conn->prepare( $query );
-    $stmt->bindParam(1, $this->id);
-    $stmt->execute();
-  
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-      
-    $this->name = $row['name'];
-}
-  
+    function readName(){
+        
+        $query = "SELECT name FROM " . $this->table_name . " WHERE id = ? ORDER BY name ASC limit 0,1";
+    
+        $stmt = $this->conn->prepare( $query );
+        $stmt->bindParam(1, $this->id);
+        $stmt->execute();
+    
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        // $this->name = $row['name'];
+        if ($row['name'] !== null) {
+            $this->name = $row['name'];
+        } else {
+            // Handle the case when the 'name' column is NULL
+            // For example, you can assign a default value or display an error message
+            $this->name = 'Unknown';
+        }
+    }
+    
 }
 ?>

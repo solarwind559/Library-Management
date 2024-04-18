@@ -18,7 +18,7 @@ $records_per_page = 7;
 // calculate for the query LIMIT clause
 $from_record_num = ($records_per_page * $page) - $records_per_page;
   
-$page_title = "Browse users";
+$page_title = "Browse Users";
 include_once('header.php');
 
 include_once('../../app/Controller/UserController.php');
@@ -41,10 +41,11 @@ if($num>0){
   
     echo "<table class='table table-hover table-responsive table-bordered'>";
         echo "<tr>";
-            echo "<th>Name</th>";
-            echo "<th>Surname</th>";
-            echo "<th>Email</th>";
-            echo "<th>Books in posession</th>";
+            echo "<th class='table-dark'>Name</th>";
+            echo "<th class='table-dark'>Surname <button class='btn btn-outline-primary' id='sortButton'>Sort</button>
+            </th>";      
+            echo "<th class='table-dark'>Email</th>";
+            echo "<th class='table-dark'>Books in posession</th>";
             
         echo "</tr>";
   
@@ -55,7 +56,7 @@ if($num>0){
                 echo "<td>{$name}</td>"; 
                 echo "<td>{$surname}</td>";
                 echo "<td>{$email}</td>";
-                echo "<td><a href='update_user.php?id={$id}' class='btn btn-info left-margin'>
+                echo "<td><a href='update_user.php?id={$id}' class='btn btn-outline-info left-margin'>
                 Edit
                 </a></td>";
             echo "</tr>";

@@ -55,12 +55,18 @@ class Book{
 
     function readAll($from_record_num, $records_per_page){
   
-        $query = "SELECT
-                    id, title, author, category_id, status
-                FROM
-                    " . $this->table_name . "
-                ORDER BY
-                    title ASC
+        // $query = "SELECT
+        //             id, title, author, category_id, status
+        //         FROM
+        //             " . $this->table_name . "
+        //         ORDER BY
+        //             title ASC
+
+        // joining tables by using aliases: b = books, c = categories;
+        $query = "SELECT b.id, b.title, b.author, b.category_id, c.name AS category_name, b.status 
+                FROM books b
+                JOIN categories c ON b.category_id = c.id
+                ORDER BY b.title ASC
                 LIMIT
                     {$from_record_num}, {$records_per_page}";
       

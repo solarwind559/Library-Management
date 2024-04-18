@@ -35,7 +35,7 @@ include_once('../../app/Model/Category.php');
                 //     echo $imagePathOther;            
                 // } 
                 ?>
-                <a href="dashboard"><img src="../../public/assets/img/Vector_Book_blue.svg" alt="logo"></a>             
+                <a href="dashboard"><img src="../../public/assets/img/Book_blue.svg" alt="logo"></a>             
             </div>
             <?php
                 $currentFile = basename($_SERVER['PHP_SELF']);
@@ -45,6 +45,7 @@ include_once('../../app/Model/Category.php');
                     echo '</ul>';
                     echo '<ul>';
                     echo '<li class="nav-item"><a class="nav-link" href="borrowed_books.php">Borrowed Book List</a></li> ';
+                    echo '<li class="nav-item"><a class="nav-link" href="book_list.php">Book List</a></li> ';
                     echo '<li class="nav-item"><a class="nav-link" href="user_list.php">User List</a></li> ';
                     echo '</ul>';
                     echo '<ul>';

@@ -46,7 +46,7 @@ if (isset($_POST['user_id']) && isset($_POST['book_id'])) {
         <table class="table table-striped table-custom">
         <p class="list-up">&darr;	Please select a single user from the list:</p>
                 <tbody>
-                    <th class='table-dark'><h4>User</h4></th>
+                    <th class='table-dark'>User</th>
                     <?php
                     while ($row_user = $stmt2->fetch(PDO::FETCH_ASSOC)) {
                         extract($row_user);
@@ -62,7 +62,7 @@ if (isset($_POST['user_id']) && isset($_POST['book_id'])) {
         <table class="table table-striped table-custom">
         <p class="list-up">&darr;	Please select up to 3 books from the list:</p>
                 <tbody>
-                    <th class='table-dark'><h4>Book</h4></th>
+                    <th class='table-dark'>Book</th>
                     <?php
                     $foundRecords = false;
 

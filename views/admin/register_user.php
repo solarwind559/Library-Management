@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="email@email.com" aria-describedby="emailHelp" name="email">
     </div>
     <div class="mb-3" id="generate-random">
         <label for="password" class="form-label">Password</label>

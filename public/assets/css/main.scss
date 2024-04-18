@@ -11,12 +11,13 @@ h1 {
 }
 
 .table-dark {
-    height: 55px;
+    height: 50px;
+    font-size: 1.2rem;
 }
 
 .user-button,
 .book-button {
-    height: 45px;
+    height: 50px;
     border-radius: 0;
     &:focus {
         box-shadow: none !important;
@@ -25,8 +26,7 @@ h1 {
         background-color: $light-blue;
     }
     &:active {
-                background-color:#6BA6FD;
-
+        background-color:#6BA6FD;
     }
 }
 .clicked-button {
@@ -47,4 +47,35 @@ navbar {
         list-style: none;
         font-weight: 500;
     }
+}
+
+table {
+    a {
+        text-decoration: none !important;
+        color: inherit;
+    }
+}
+
+.astronomy-category {
+    background-color: $light-blue !important;
+}
+
+.span-number {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #FC2079;
+}
+
+.nav-link {
+    padding: 3px !important;
+}
+.icon {
+    svg {
+    width: 50px;
+    height: 50px;    
+    path {
+        fill: #2079FC;
+    }    
+    }
+
 }

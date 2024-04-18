@@ -1,5 +1,5 @@
 <?php
-$page_title = "Edit Book";
+$page_title = "Edit Book Info";
 include_once('header.php');
 // get ID of the book to be edited
 $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
@@ -18,14 +18,14 @@ $book->id = $id;
 // read the details of book to be edited
 $book->readOne(); 
 
-$status = $book->status;
+// $status = $book->status;
 
 ?>
 <?php
     // Check if the HTTP_REFERER is set
     if (isset($_SERVER['HTTP_REFERER'])) {
         $referrer = $_SERVER['HTTP_REFERER'];
-        echo '<a href="' . $referrer . '"><button>Go Back</button></a><br><br>';
+        echo '<a href="' . $referrer . '"><button class="btn btn-primary">Go Back</button></a><br><br>';
     } else {
         echo 'No referrer found.';
     }
@@ -60,7 +60,7 @@ $status = $book->status; // Example value (replace with your actual value)
 
 // Toggle the value when the button is clicked
 if (isset($_POST['toggle'])) {
-    $status = ($status == 1) ? 0 : 1;
+    // $status = ($status == 1) ? 0 : 1;
     // Update the book status (you need to implement this logic)
     // Example: $book->status = $status;
     // Then call your existing update method:
@@ -116,16 +116,15 @@ if (isset($_POST['toggle'])) {
                     ?>
                 </td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td>Status</td>
-                <td><?php 
-                $status_message = ($status == 1) ? "<b style='color:#dc3545;'>Borrowed</b>" : "<b style='color:#198754;'>Available</b>";
-
-                echo $status_message;
-
+                <td> -->
+                <?php 
+                // $status_message = ($status == 1) ? "<b style='color:#dc3545;'>Borrowed</b>" : "<b style='color:#198754;'>Available</b>";
+                // echo $status_message;
                 ?>
 
-            </tr>
+            <!-- </tr> -->
     
             <tr>
                 <td></td>
