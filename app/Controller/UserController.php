@@ -60,21 +60,19 @@ class UserController {
 
     function viewAll($from_record_num, $records_per_page){
   
-        $query = "SELECT
-                    id, name, surname, email
-                FROM
-                    " . $this->table_name . "
-                ORDER BY
-                    name ASC
-                LIMIT
-                    {$from_record_num}, {$records_per_page}";
-      
+        $query = "SELECT u.id, u.name, u.surname, u.email, COUNT(b.id) AS books_in_possession, GROUP_CONCAT(b.title SEPARATOR ',<br>') AS book_names
+        FROM users u
+        LEFT JOIN borrowed_books bb ON u.id = bb.user_id
+        LEFT JOIN books b ON bb.book_id = b.id
+        GROUP BY u.id
+        LIMIT {$from_record_num}, {$records_per_page}";
+            
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();
       
         return $stmt;
     }
-        // used for paging products
+        // used for paging users
         public function countAll(){
     
             $query = "SELECT id FROM " . $this->table_name . "";
@@ -89,15 +87,25 @@ class UserController {
     
         function viewOne(){
         
-            $query = "SELECT
-                        name, surname, email
-                    FROM
-                        " . $this->table_name . "
-                    WHERE
-                        id = ?
-                    LIMIT
-                        0,1";
-        
+            // $query = "SELECT
+            //             name, surname, email
+            //         FROM
+            //             " . $this->table_name . "
+            //         WHERE
+            //             id = ?
+            //         LIMIT
+            //             0,1";
+
+            $query = "SELECT u.name, u.surname, u.email, GROUP_CONCAT(b.title SEPARATOR ',<br>') AS book_names
+            FROM users u
+            LEFT JOIN borrowed_books bb ON u.id = bb.user_id
+            LEFT JOIN books b ON bb.book_id = b.id
+            WHERE
+            u.id = ?
+            LIMIT
+            0,1
+            ";
+
             $stmt = $this->conn->prepare( $query );
             $stmt->bindParam(1, $this->id);
             $stmt->execute();
@@ -106,7 +114,9 @@ class UserController {
         
             $this->name = $row['name'];
             $this->surname = $row['surname'];
-            // $this->category_id = $row['category_id'];
+            $this->email = $row['email'];
+            $this->book_names = $row['book_names'];
+
         }
     
         function update(){
@@ -116,6 +126,7 @@ class UserController {
                     SET
                         name = :name,
                         surname = :surname,
+                        email = :email
                     WHERE
                         id = :id";
           
@@ -124,13 +135,13 @@ class UserController {
             // posted values
             $this->name=htmlspecialchars(strip_tags($this->name));
             $this->surname=htmlspecialchars(strip_tags($this->surname));
-            // $this->category_id=htmlspecialchars(strip_tags($this->category_id));
+            $this->email=htmlspecialchars(strip_tags($this->email));
             $this->id=htmlspecialchars(strip_tags($this->id));
           
             // bind parameters
             $stmt->bindParam(':name', $this->name);
             $stmt->bindParam(':surname', $this->surname);
-            // $stmt->bindParam(':category_id', $this->category_id);
+            $stmt->bindParam(':email', $this->email);
             $stmt->bindParam(':id', $this->id);
           
             // execute the query

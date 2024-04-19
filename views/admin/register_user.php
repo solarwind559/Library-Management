@@ -49,8 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <div class="container">
-    <form class="p-5" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
-    
     <div class="mb-3">
         <label for="formGroupExampleInput" class="form-label">Name</label>
         <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name" name="name">
@@ -65,14 +63,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div class="mb-3" id="generate-random">
         <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password">
+        <input type="password" class="form-control" id="password" name="password" placeholder="********">
         <button class="btn btn-secondary mt-3" id="generate" type="button">Generate Student Password</button>
         <!-- toggle between password visibility -->
         <div class="my-3">
             <input type="checkbox" class="toggle" onclick="showPassword()"> Show Password 
         </div>             
         <label for="password" class="form-label">Confirm Password</label>
-        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="********">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button> <br><br>
     </form>    

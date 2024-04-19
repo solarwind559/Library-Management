@@ -55,19 +55,27 @@ table a {
 }
 
 .span-number {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 500;
-  color: #FC2079;
 }
 
 .nav-link {
   padding: 3px !important;
 }
 
-.icon svg {
+.library-info a {
+  text-decoration: none;
+}
+.library-info .icon {
+  width: 190px;
+  box-shadow: 5px 5px 25px 0px rgb(213, 213, 213);
+  border-radius: 20px;
+}
+.library-info .icon svg {
+  margin-top: 15px;
   width: 50px;
   height: 50px;
 }
-.icon svg path {
+.library-info .icon svg path {
   fill: #2079FC;
 }/*# sourceMappingURL=main.css.map */

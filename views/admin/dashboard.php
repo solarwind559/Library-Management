@@ -30,25 +30,25 @@ $userCount = $user->countAll();
 
 <h2 class="text-center mt-4">Current library statistics</h2>
 
-<div class="d-flex justify-content-around py-5">
+<div class="d-flex justify-content-around py-5 library-info">
 
-    <div class="icon text-center"><a href="book_list">
+    <a href="book_list"><div class="icon text-center p-3">
         <?php include_once('../../public/assets/img/book_icon.svg'); ?>    
-        <p class="span-number mt-3"> [ <?php echo $bookCount; ?> ]</p>
-        <p>books</p></a>
-    </div>
+        <p class="span-number my-2"><?php echo $bookCount; ?></p>
+        <p>BOOKS</p>
+    </div></a>
 
-    <div class="icon text-center"><a href="user_list">
+    <a href="user_list"><div class="icon text-center p-3">
     <?php include_once('../../public/assets/img/users_icon.svg'); ?>    
-        <p class="span-number mt-3"> [ <?php echo $userCount; ?> ] </p>
-        <p>users</p></a>
-    </div>
+        <p class="span-number my-2"><?php echo $userCount; ?> </p>
+        <p>USERS</p>
+    </div></a>
 
-    <div class="icon text-center"><a href="borrowed_books">
+    <a href="borrowed_books"><div class="icon text-center p-3">
     <?php include_once('../../public/assets/img/exclamation_icon.svg'); ?>    
-        <p class="span-number mt-3"> [ 0 ] </p>
-        <p>overdue books</p></a>
-    </div>
+        <p class="span-number my-2">0 </p>
+        <p>OVERDUE BOOKS</p>
+    </div></a>
 
 </div>
 

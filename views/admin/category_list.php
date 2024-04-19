@@ -18,10 +18,9 @@ $records_per_page = 7;
 // calculate for the query LIMIT clause
 $from_record_num = ($records_per_page * $page) - $records_per_page;
   
-$page_title = "Browse Books";
+$page_title = "Categories";
 include_once('header.php');
 
-include_once '../../src/admin/delete_book.php';
 
 // get database connection
 $database = new Database();
@@ -78,7 +77,7 @@ if ($num > 0) {
         
         
 
-        $status_message = ($row['status'] == 1) ? "<i class='text-danger'>Borrowed</i>" : "<i class='text-success'>Available</i>";
+        $status_message = ($row['status'] == 1) ? "<b style='color:#dc3545;'>Borrowed</b>" : "<b style='color:#198754;'>Available</b>";
         echo "<tr>";
         echo "<td><a href='read_one.php?id={$row['id']}'>{$row['title']}</a></td>";
         echo "<td>{$row['author']}</td>";
@@ -90,11 +89,14 @@ if ($num > 0) {
             
 
         echo "<td";
-            // if ($name === 'Astronomy') {
-            //     echo " class='astronomy-category' title='Show all in Astronomy'";
-            // }
+            if ($name === 'Astronomy') {
+                echo " class='astronomy-category' title='Show all in Astronomy'";
+            }
         echo ">";
         echo $name;
+        // var_dump($category);
+
+        // ends category; }
 
         echo "<td>{$status_message}</td>";
         echo "<td>";
