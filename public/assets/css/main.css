@@ -78,4 +78,16 @@ table a {
 }
 .library-info .icon svg path {
   fill: #2079FC;
+}
+.library-info .user-icon svg {
+  width: 50px;
+  height: 50px;
+}
+.library-info .user-icon svg path {
+  fill: #2079FC;
+}
+
+.student-page h1 {
+  font-size: 1.3rem !important;
+  color: #2079FC;
 }/*# sourceMappingURL=main.css.map */

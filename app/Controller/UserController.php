@@ -86,17 +86,8 @@ class UserController {
         }
     
         function viewOne(){
-        
-            // $query = "SELECT
-            //             name, surname, email
-            //         FROM
-            //             " . $this->table_name . "
-            //         WHERE
-            //             id = ?
-            //         LIMIT
-            //             0,1";
-
-            $query = "SELECT u.name, u.surname, u.email, GROUP_CONCAT(b.title SEPARATOR ',<br>') AS book_names
+            
+            $query = "SELECT u.name, u.surname, u.email, GROUP_CONCAT(b.title SEPARATOR ',<br>') AS book_names, bb.borrow_id, bb.borrow_date, bb.return_date
             FROM users u
             LEFT JOIN borrowed_books bb ON u.id = bb.user_id
             LEFT JOIN books b ON bb.book_id = b.id
@@ -109,13 +100,22 @@ class UserController {
             $stmt = $this->conn->prepare( $query );
             $stmt->bindParam(1, $this->id);
             $stmt->execute();
-        
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
+
+
+
+            //working code:        
+            $row = $stmt->fetch(PDO::FETCH_ASSOC); //delete as experiment
+
             $this->name = $row['name'];
             $this->surname = $row['surname'];
             $this->email = $row['email'];
+            $this->borrow_id = $row['borrow_id'];
+
             $this->book_names = $row['book_names'];
+
+            
+            return $row;
 
         }
     
@@ -152,6 +152,40 @@ class UserController {
             return false;
               
         }
+
+
+        public static function validateEmail($email) {
+            return filter_var($email, FILTER_VALIDATE_EMAIL);
+        }
+    
+        // Validate password strength (at least 8 characters)
+        public static function validatePassword($password) {
+            return strlen($password) >= 8;
+        }
+    
+        // Validate login credentials
+        public function validateLogin($email, $password) {
+            $query = "SELECT id FROM users WHERE email = :email AND password = :password";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":password", $password);
+            $stmt->execute();
+    
+            $result = $stmt->fetchColumn();
+            return $result; // Return user_id if login is successful, or false if not
+        }
+
+        // Logout: Destroy the session
+        public static function logout() {
+            session_start();
+            session_unset();
+            session_destroy();
+            // Redirect to the login page (adjust the URL as needed)
+            header('Location: login.php');
+            exit();
+        }
+
+    
 }
 
 ?>

@@ -20,15 +20,36 @@ class BookController{
         //         LIMIT
         //             10";
 
-        "SELECT borrowed_books.*, CONCAT(users.name, ' ', users.surname) AS full_name, books.title
-        FROM borrowed_books
+        // "SELECT borrowed_books.*, CONCAT(users.name, ' ', users.surname) AS full_name, GROUP_CONCAT(books.title SEPARATOR ',<br>') AS book_names, books.title
+        // FROM borrowed_books
+        // JOIN users ON borrowed_books.user_id = users.id
+        // JOIN books ON borrowed_books.book_id = books.id";
+
+        $query = 
+        "SELECT
+        borrowed_books.*,
+        CONCAT(users.name, ' ', users.surname) AS full_name,
+        books.id AS book_id,
+        books.title AS book_name,
+        GROUP_CONCAT(books.title SEPARATOR ',<br>') AS book_names,
+        books.title
+        FROM
+            borrowed_books
         JOIN users ON borrowed_books.user_id = users.id
-        JOIN books ON borrowed_books.book_id = books.id";
+        JOIN books ON borrowed_books.book_id = books.id
+        GROUP BY borrowed_books.borrow_id";
       
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();
       
         return $stmt;
+
+        $this->title = $row['title'];
+        // $this->surname = $row['surname'];
+        // $this->email = $row['email'];
+        // $this->borrow_id = $row['borrow_id'];
+
+        // $this->book_names = $row['book_names'];
     
     }
 

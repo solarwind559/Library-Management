@@ -1,41 +1,48 @@
 <?php
-$page_title = "Admin Login";
-
-include_once('header.php');
-
-include_once('../../app/Controller/AdminController.php');
-
 // Start or resume the session
 session_start();
 
+$page_title = "User Login";
+
+include_once('header.php');
+
+include_once('../../app/Controller/UserController.php');
+
 // Check if the form has been submitted
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $database = new Database();
     $db = $database->getConnection();
-    $auth = new AdminController($db);
+    $user = new UserController($db);
 
     $email = $_POST['email'];
     $password = $_POST['password'];
+    // $name = $_SESSION['name'];
+    // $surname = $_SESSION['surname'];
 
-    // Validate email and password
-    if ($auth->validateEmail($email) && $auth->validatePassword($password)) {
-        $admin_id = $auth->validateLogin($email, $password);
-        if ($admin_id) {
-            // User is authenticated, set session variable
-            $_SESSION['admin_id'] = $admin_id;
+    if ($user->validateEmail($email) && $user->validatePassword($password)) {
+        $user_id = $user->validateLogin($email, $password);
+        $user->viewOne();
+        if ($user_id) {
+            $_SESSION['user_id'] = $user_id;
+            // $_SESSION['name'] = $user->name;
+            // $_SESSION['surname'] = $user->surname;
+
             header('Location: dashboard'); // Redirect to the protected page
             exit();
         } else {
-            echo "<div class='alert alert-danger' role='alert'>Invalid login credentials.</div>";
+            echo "<div class='alert alert-danger' role='alert'>Invalid email or password.</div>";
         }
+
     } else {
-        echo "<div class='alert alert-danger' role='alert'>Invalid email or password.</div>";
+        echo "<div class='alert alert-danger' role='alert'>Invalid email or password format.</div>";
     }
 }
 
+
 // Example logout process (logout.php)
 if (isset($_GET['logout'])) {
-   AdminController::logout(); // Call the logout method
+   UserController::logout(); // Call the logout method
 }
 
 ?>
@@ -44,7 +51,7 @@ if (isset($_GET['logout'])) {
         <!-- <p>Please, sign in</p> -->
             <div class="col-12 col-lg-6 mb-3">
                 <label for="" class="mb-1">Email Address:</label>
-                <input class="form-control" type="email" placeholder="admin@example.com" name="email" value="">
+                <input class="form-control" type="email" placeholder="User@example.com" name="email" value="">
             </div>
  
             <div class="col-12 col-lg-6 mb-3">

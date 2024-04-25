@@ -1,19 +1,19 @@
 <?php
-$page_title = "Register A New Library User";
+$page_title = "Register a new Library User";
 include_once('header.php');
 include_once('../../app/Controller/UserController.php');
 include_once('../../config/db.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name']; // Use null coalescing operator to provide a default value
+    $name = $_POST['name'];
     $surname = $_POST['surname'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $db = new Database();
-    $conn = $db->getConnection();
+    $database = new Database();
+    $db = $database->getConnection();
 
-    $newUser = new UserController($conn);
+    $newUser = new UserController($db);
 
     $newUser->name = $name;
     $newUser->surname = $surname;
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<div class="container">
+<form class="p-5" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
     <div class="mb-3">
         <label for="formGroupExampleInput" class="form-label">Name</label>
         <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name" name="name">
@@ -73,8 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="********">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button> <br><br>
-    </form>    
-</div>
+</form>    
 
 <script>
 document.getElementById('generate').addEventListener('click', function () {
@@ -109,6 +108,4 @@ function showPassword() {
 }
 </script>
 
-<?php
-include_once('../partials/footer.php')
-?>
+<?php include_once('../partials/footer.php')?>

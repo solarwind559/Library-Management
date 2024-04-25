@@ -3,7 +3,7 @@ session_start();
 
 // Check if the user is authenticated
 if (!isset($_SESSION['admin_id'])) {
-    // Redirect to the login page (adjust the URL as needed)
+    // Redirect to the login page
     header('Location: login');
     exit();
 }
@@ -44,7 +44,7 @@ if (isset($_POST['user_id']) && isset($_POST['book_id'])) {
     <div class="row">
         <div class="col-6">
         <table class="table table-striped table-custom">
-        <p class="list-up">&darr;	Please select a single user from the list:</p>
+        <p class="list-up">&darr;	Please select a user from the list:</p>
                 <tbody>
                     <th class='table-dark'>User</th>
                     <?php
@@ -60,7 +60,7 @@ if (isset($_POST['user_id']) && isset($_POST['book_id'])) {
         </div>
         <div class="col-6">
         <table class="table table-striped table-custom">
-        <p class="list-up">&darr;	Please select up to 3 books from the list:</p>
+        <p class="list-up">&darr;	Please select a book from the list:</p>
                 <tbody>
                     <th class='table-dark'>Book</th>
                     <?php
@@ -116,13 +116,23 @@ if (isset($_POST['user_id']) && isset($_POST['book_id'])) {
     });
 });
 
-
     bookButtons.forEach(button => {
-        button.addEventListener('click', () => {
+    button.addEventListener('click', () => {
+        const isSelected = button.classList.contains('clicked-button');
+
+        // Deselect all book buttons
+        bookButtons.forEach(btn => btn.classList.remove('clicked-button'));
+
+        if (!isSelected) {
+            // Toggle the .clicked-button class for the clicked button
+            button.classList.add('clicked-button');
             selectedBookIdInput.value = button.getAttribute('data-book-id');
-            button.classList.toggle('clicked-button');
-        });
+        } else {
+            // If already selected, remove the selection
+            selectedBookIdInput.value = ''; // Clear the selected book ID
+        }
     });
+});
 
 </script>
 
