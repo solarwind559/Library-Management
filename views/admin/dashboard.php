@@ -12,6 +12,8 @@ if (!isset($_SESSION['admin_id'])) {
 $page_title = "Librarian Dashboard";
 include_once('header.php');
 include_once('../../app/Controller/UserController.php');
+include_once('../../app/Controller/BookController.php');
+
 
 // get database connection
 $database = new Database();
@@ -21,6 +23,8 @@ $db = $database->getConnection();
 $book = new Book($db);
 $category = new Category($db);
 $user = new UserController($db);
+$showBooks = new BookController($db);
+$stmt = $showBooks->showBorrowedBooks();
 
 // fetch the number of records in database
 $bookCount = $book->countAll();
@@ -46,8 +50,25 @@ $userCount = $user->countAll();
 
     <a href="borrowed_books"><div class="icon text-center p-3">
     <?php include_once('../../public/assets/img/exclamation_icon.svg'); ?>    
-        <p class="span-number my-2">0 </p>
-        <p>OVERDUE BOOKS</p>
+        <p class="span-number my-2">
+            
+            <?php
+            // get number of rows with date earlier thank current date        
+            $currentDate = date('Y-m-d');
+            $earlierRowsCount = 0; // Counter variable
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                // check if current date has not passed
+                if ($row['return_date'] < $currentDate) { 
+                    $earlierRowsCount++; // Increment the counter
+                }
+            }
+
+            echo $earlierRowsCount;
+            ?> 
+            
+        </p>         
+        <p>BOOKS OVERDUE</p>
     </div></a>
 
 </div>

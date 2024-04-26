@@ -94,9 +94,9 @@ if ($stmt->rowCount() > 0) {
                     echo "</tr>";
                     // echo messages to the user
                     if ($row['borrow_date'] = 1) {
-                        echo "<div class='alert alert-danger mt-3' role='alert'>You have 1 overdue book. Please return it to the library.</div>";
+                        echo "<div class='alert alert-danger mt-3' role='alert'>You have 1 overdue book. Please return it to the library as soon as possible. Thank you!</div>";
                     } else if ($row['borrow_date'] > 1) {
-                        echo "<div class='alert alert-danger' role='alert'>You have overdue books. Please return them to the library.</div>";
+                        echo "<div class='alert alert-danger' role='alert'>You have overdue books. Please return them to the library as soon as possible. Thank you!</div>";
                     }
                 }
             }

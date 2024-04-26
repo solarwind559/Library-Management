@@ -34,33 +34,35 @@ $stmt = $bookView->showBorrowedBooks();
 $stmt2 = $user->viewAll($from_record_num, $records_per_page);
 $stmt3 = $book->readAll($from_record_num, $records_per_page);
 
-// if (isset($_POST['user_id']) && isset($_POST['book_id'])) {
-//     $user_id = $_POST['user_id'];
-//     $book_id = $_POST['book_id'];
-//     $bookView->borrowBook($user_id, $book_id);
-//     } 
     if (isset($_GET['success']) && $_GET['success'] == 1) {
         echo "<div class='alert alert-success' role='alert'>
             Book was returned successfully.
         </div>";
     }
 
-?>
+$currentDate = date('Y-m-d');
+$earlierRowsCount = 0; // Counter variable
 
+echo "<div class='d-flex flex-column'>";
 
-<?php
 if ($stmt->rowCount() > 0) {
 
-    echo "<table class='table table-striped'>";
+    echo "<table class='table table-striped' style='order:2;'>";
     echo "<tr scope='row' class='table-dark'><th>Borrowed Book:</th><th>Borrowed by:</th><th>Borrow Date:</th><th>Return Date:</th><th></th></tr>";
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        extract($row); // Extract the values from the fetched row
 
-        echo "<tr scope='row'>";
-        echo "<td>{$title}</td>";
-        echo "<td>{$full_name}</td>";
-        echo "<td>{$borrow_date}</td>";
-        echo "<td>{$return_date}</td>";
+        extract($row); // Extract the values from the fetched row
+                if ($row['return_date'] < $currentDate) {                       
+                    $earlierRowsCount++; // Increment the counter
+                    echo "<tr scope='row'class='text-danger table-danger'>";
+                } else {
+                    echo "<tr scope='row'>";
+                }
+                    echo "<td>{$title}</td>";
+                    echo "<td>{$full_name}</td>";
+                    echo "<td>{$borrow_date}</td>";        
+                    echo "<td>{$return_date}</td>";
+
         echo "<td>
             <form action='../../src/admin/return_book.php' method='post' id='return-form'>
                 <input type='hidden' name='return-form' value='return-form'>
@@ -74,14 +76,14 @@ if ($stmt->rowCount() > 0) {
 } else {
     echo "No borrowed books found.";
 }
-?>
 
-<?php
+echo "<div class='alert alert-danger' style='order:1;'>There are "  . $earlierRowsCount . " overdue books.</div>";
+
+echo "</div>"; //close d-flex
 
 $page_url = "?";
-// $total_rows = $book->countAll();
-// include_once('../../pagination.php');
-//include the script
+
 include_once('../partials/footer.php');
+
 ?>
 
