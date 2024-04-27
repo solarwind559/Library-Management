@@ -24,8 +24,7 @@ $category = new Category($db);
 
 <?php 
 
-
-// if the form was submitted - PHP OOP CRUD Tutorial
+// if the form was submitted
 if($_POST){
   
     // set product property values
@@ -44,7 +43,6 @@ if($_POST){
     }
 }
 ?>
-    <!-- HTML form for creating a product -->
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
     
 
@@ -60,7 +58,6 @@ if($_POST){
 
         <div class="mb-3">
             <label>Category</label>
-            <!-- categories from database will be here -->
             <?php
                 // read the product categories from the database
                 $stmt = $category->read();
@@ -78,9 +75,7 @@ if($_POST){
                 ?>
         </div>
 
-
-                <button type="submit" class="btn btn-primary">Create</button>
-
+            <button type="submit" class="btn btn-primary">Create</button>
 
     </form>
 

@@ -18,8 +18,6 @@ $book->id = $id;
 // read the details of book to be edited
 $book->readOne(); 
 
-// $status = $book->status;
-
 ?>
 <?php
     // Check if the HTTP_REFERER is set
@@ -60,10 +58,7 @@ $status = $book->status; // Example value (replace with your actual value)
 
 // Toggle the value when the button is clicked
 if (isset($_POST['toggle'])) {
-    // $status = ($status == 1) ? 0 : 1;
-    // Update the book status (you need to implement this logic)
-    // Example: $book->status = $status;
-    // Then call your existing update method:
+
     if ($book->update()) {
         echo "<div class='alert alert-success alert-dismissable'>
             The book has been updated.
@@ -116,16 +111,6 @@ if (isset($_POST['toggle'])) {
                     ?>
                 </td>
             </tr>
-            <!-- <tr>
-                <td>Status</td>
-                <td> -->
-                <?php 
-                // $status_message = ($status == 1) ? "<b style='color:#dc3545;'>Borrowed</b>" : "<b style='color:#198754;'>Available</b>";
-                // echo $status_message;
-                ?>
-
-            <!-- </tr> -->
-    
             <tr>
                 <td></td>
                 <td>

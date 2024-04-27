@@ -14,7 +14,6 @@ include_once('header.php');
 include_once('../../app/Controller/UserController.php');
 include_once('../../app/Controller/BookController.php');
 
-
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
@@ -66,7 +65,7 @@ $userCount = $user->countAll();
 
             echo $earlierRowsCount;
             ?> 
-            
+
         </p>         
         <p>BOOKS OVERDUE</p>
     </div></a>

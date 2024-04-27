@@ -32,7 +32,6 @@ $status_message = ($status == 1) ? "<b style='color:#dc3545;'>Borrowed</b>" : "<
 
 <?php
 
-// HTML table for displaying a book details
 echo "<table class='table table-hover table-bordered'>
   
     <tr>

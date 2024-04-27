@@ -46,8 +46,6 @@ function compare_rows($row1, $row2, $sort_column, $sort_order) {
     }
 }
 
-
-// Assuming you have an array of rows (e.g., fetched from the database)
 $rows = [];  // Initialize an empty array to store the rows
 
 
@@ -74,8 +72,6 @@ if ($num > 0) {
     foreach ($rows as $row) {
 
         extract($row);  // Extract values from the $row array
-        
-        
 
         $status_message = ($row['status'] == 1) ? "<b style='color:#dc3545;'>Borrowed</b>" : "<b style='color:#198754;'>Available</b>";
         echo "<tr>";
@@ -94,7 +90,6 @@ if ($num > 0) {
             }
         echo ">";
         echo $name;
-        // var_dump($category);
 
         // ends category; }
 
@@ -106,7 +101,6 @@ if ($num > 0) {
         echo "</td>";
         echo "</tr>";
 
-        // var_dump($name);
     }
     echo "</table>";
 } else {
@@ -116,7 +110,6 @@ if ($num > 0) {
 ?>
 
 <?php
-//$page_url = "dashboard.php?";
 $page_url = "?";
 $total_rows = $book->countAll();
 include_once('../../pagination.php');

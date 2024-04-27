@@ -33,7 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Example logout process (logout.php)
 if (isset($_GET['logout'])) {
    AdminController::logout(); // Call the logout method
 }
@@ -41,7 +40,6 @@ if (isset($_GET['logout'])) {
 ?>
     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
         <div class="form-group">
-        <!-- <p>Please, sign in</p> -->
             <div class="col-12 col-lg-6 mb-3">
                 <label for="" class="mb-1">Email Address:</label>
                 <input class="form-control" type="email" placeholder="admin@example.com" name="email" value="">

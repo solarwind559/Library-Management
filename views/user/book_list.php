@@ -45,9 +45,7 @@ function compare_rows($row1, $row2, $sort_column, $sort_order) {
     }
 }
 
-// Assuming you have an array of rows (e.g., fetched from the database)
 $rows = [];  // Initialize an empty array to store the rows
-
 
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $rows[] = $row;  // Append each fetched row to the $rows array
@@ -89,17 +87,12 @@ if ($num > 0) {
 
         echo "<td>{$status_message}</td>";
         echo "</tr>";
-
-        // var_dump($name);
     }
     echo "</table>";
 } else {
     echo "No data found in database.";
 }
 
-?>
-
-<?php
 $page_url = "?";
 $total_rows = $book->countAll();
 include_once('../../pagination.php');
