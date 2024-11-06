@@ -35,26 +35,31 @@ $userCount = $user->countAll();
 
 <h2 class="text-center mt-4">Current library statistics</h2>
 
-<div class="d-flex justify-content-around py-5 library-info">
+<div class="row py-5 library-info">
 
-    <a href="book_list"><div class="icon text-center p-3">
+    <div class="col-12 col-md-4 text-center mb-3 p-3">
+      <a href="book_list" class="icon">
         <?php include_once('../../public/assets/img/book_icon.svg'); ?>    
         <p class="span-number my-2"><?php echo $bookCount; ?></p>
         <p>BOOKS</p>
-    </div></a>
+      </a>
+    </div>
 
-    <a href="user_list"><div class="icon text-center p-3">
-    <?php include_once('../../public/assets/img/users_icon.svg'); ?>    
+    <div class="col-12 col-md-4 text-center mb-3 p-3">
+      <a href="user_list" class="icon">
+    	<?php include_once('../../public/assets/img/users_icon.svg'); ?>    
         <p class="span-number my-2"><?php echo $userCount; ?> </p>
         <p>USERS</p>
-    </div></a>
+      </a>
+    </div>
 
-    <a href="borrowed_books"><div class="icon text-center p-3">
-    <?php include_once('../../public/assets/img/exclamation_icon.svg'); ?>    
+    <div class="col-12 col-md-4 text-center mb-3 p-3">
+       <a href="borrowed_books" class="icon">
+    	<?php include_once('../../public/assets/img/exclamation_icon.svg'); ?>    
         <p class="span-number my-2">
             
             <?php
-            // get number of rows with date earlier thank current date        
+            // get number of rows with date earlier than current date        
             $currentDate = date('Y-m-d');
             $earlierRowsCount = 0; // Counter variable
 
@@ -70,7 +75,8 @@ $userCount = $user->countAll();
 
         </p>         
         <p>BOOKS OVERDUE</p>
-    </div></a>
+       </a>
+    </div>
 
 </div>
 

@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<form class="p-5" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
     <div class="mb-3">
         <label for="formGroupExampleInput" class="form-label">Name</label>
         <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name" name="name">

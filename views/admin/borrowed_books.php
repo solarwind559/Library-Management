@@ -43,7 +43,7 @@ $stmt3 = $book->readAll($from_record_num, $records_per_page);
 $currentDate = date('Y-m-d');
 $earlierRowsCount = 0; // Counter variable
 
-echo "<div class='d-flex flex-column'>";
+echo "<div class='d-flex flex-column table-responsive'>";
 
 if ($stmt->rowCount() > 0) {
 

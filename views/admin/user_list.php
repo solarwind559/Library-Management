@@ -64,7 +64,8 @@ usort($rows, function ($row1, $row2) use ($sort_column, $sort_order) {
 
 if($num>0){
   
-    echo "<table class='table table-hover table-responsive table-bordered'>";
+    echo "<div class='table-responsive'>";
+    echo "<table class='table table-hover table-bordered'>";
         echo "<tr>";
             echo "<th class='table-dark'><a href='?sort=name&order=" . ($sort_column === 'name' ? ($sort_order === 'asc' ? 'desc' : 'asc') : 'asc') . "'>Name &#8593;&#8595;</a></th>"; 
             echo "<th class='table-dark'><a href='?sort=surname&order=" . ($sort_column === 'surname' ? ($sort_order === 'asc' ? 'desc' : 'asc') : 'asc') . "'>Surname &#8593;&#8595;</a></th>";
@@ -93,6 +94,7 @@ if($num>0){
             echo "</tr>";
         }
     echo "</table>";
+    echo "</div>";
 }
     else {
         echo "<div class='alert alert-info'>No users found.</div>";

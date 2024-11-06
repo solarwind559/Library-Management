@@ -58,14 +58,15 @@ usort($rows, function ($row1, $row2) use ($sort_column, $sort_order) {
 
 if ($num > 0) {
 
+    echo "<div class='table-responsive'>";
     echo "<table class='table table-hover table-responsive table-bordered' id='categoryTable'>";
     echo "<tr>";
     echo "<th class='table-dark'><a href='?sort=title&order=" . ($sort_column === 'title' ? ($sort_order === 'asc' ? 'desc' : 'asc') : 'asc') . "'>Title &#8593;&#8595;</a></th>";
     echo "<th class='table-dark'><a href='?sort=author&order=" . ($sort_column === 'author' ? ($sort_order === 'asc' ? 'desc' : 'asc') : 'asc') . "'>Author &#8593;&#8595;</a></th>";
     echo "<th class='table-dark'><a href='?sort=category_name&order=" . ($sort_column === 'category_name' ? ($sort_order === 'asc' ? 'desc' : 'asc') : 'asc') . "'>Category &#8593;&#8595;</a></th>";
     echo "<th class='table-dark'><a href='?sort=status&order=" . ($sort_column === 'status' ? ($sort_order === 'asc' ? 'desc' : 'asc') : 'asc') . "'>Status &#8593;&#8595;</a></th>";
-    echo "<th class='table-dark'></th>";
     echo "</tr>";
+    echo "</div>";
 
     foreach ($rows as $row) {
 

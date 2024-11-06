@@ -42,7 +42,7 @@ if (isset($_POST['user_id']) && isset($_POST['book_id'])) {
 ?>
 <form action="" method="POST" id="assign-form">                
     <div class="row">
-        <div class="col-6">
+        <div class="col-6 table-responsive">
         <table class="table table-striped table-custom">
         <p class="list-up">&darr;	Please select a user from the list:</p>
                 <tbody>
@@ -58,7 +58,7 @@ if (isset($_POST['user_id']) && isset($_POST['book_id'])) {
                 </tbody>
             </table>
         </div>
-        <div class="col-6">
+        <div class="col-6 table-responsive">
         <table class="table table-striped table-custom">
         <p class="list-up">&darr;	Please select a book from the list:</p>
                 <tbody>
@@ -91,12 +91,59 @@ if (isset($_POST['user_id']) && isset($_POST['book_id'])) {
     </div>
 </form>
 
-<!-- Button functionality -->
-<script src="../../public/assets/js/buttons.js"></script>
+<script>
+    // JavaScript to handle button clicks and set hidden input values
+    const userButtons = document.querySelectorAll('.user-button');
+    const bookButtons = document.querySelectorAll('.book-button');
+    const selectedUserIdInput = document.getElementById('selected-user-id');
+    const selectedBookIdInput = document.getElementById('selected-book-id');
+
+    userButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const isSelected = button.classList.contains('clicked-button');
+
+        // Deselect all user buttons
+        userButtons.forEach(btn => btn.classList.remove('clicked-button'));
+
+        if (!isSelected) {
+            // Toggle the .clicked-button class for the clicked button
+            button.classList.add('clicked-button');
+            selectedUserIdInput.value = button.getAttribute('data-user-id');
+        } else {
+            // If already selected, remove the selection
+            selectedUserIdInput.value = ''; // Clear the selected user ID
+        }
+    });
+});
+
+    bookButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const isSelected = button.classList.contains('clicked-button');
+
+        // Deselect all book buttons
+        bookButtons.forEach(btn => btn.classList.remove('clicked-button'));
+
+        if (!isSelected) {
+            // Toggle the .clicked-button class for the clicked button
+            button.classList.add('clicked-button');
+            selectedBookIdInput.value = button.getAttribute('data-book-id');
+        } else {
+            // If already selected, remove the selection
+            selectedBookIdInput.value = ''; // Clear the selected book ID
+        }
+    });
+});
+
+</script>
+
+
+
 
 <?php
 
 $page_url = "?";
+// $total_rows = $book->countAll();
+// include_once('../../pagination.php');
 //include the script
 include_once('../partials/footer.php');
 ?>

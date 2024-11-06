@@ -32,10 +32,12 @@ $currentFile = basename($_SERVER['PHP_SELF']);
             <?php
                 $currentFile = basename($_SERVER['PHP_SELF']);
                 if ($currentFile !== 'login.php') {
-                    echo '<navbar class="col-12 col-md-6 mt-2 text-end d-flex justify-content-end"><ul class="nav">';
-                    echo '<li class="nav-item"><a class="nav-link" href="book_list">Book List |</a></li> ';
-                    echo '<li class="nav-item"><a class="nav-link" href="../../src/user/user_logout">Log Out |</a></li>';
-                    echo '</ul></navbar>';
+                echo '<nav class="navbar-nav col-12 col-md-6 mt-2 text-end d-flex justify-content-around px-3">';
+                echo '   <ul class="nav justify-content-end">';
+                echo '     <li class="nav-item px-5"><a class="nav-link" href="book_list">Book List</a></li>';
+                echo '     <li class="nav-item"><a class="nav-link" href="../../src/user/user_logout">Log Out</a></li>';
+                echo '   </ul>';
+                echo '</nav>';
                 }
             ?>
 

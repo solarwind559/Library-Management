@@ -32,19 +32,43 @@ $currentFile = basename($_SERVER['PHP_SELF']);
             <?php
                 $currentFile = basename($_SERVER['PHP_SELF']);
                 if ($currentFile !== 'login.php') {
-                    echo '<navbar class="col-12 col-md-6 mt-2 text-end d-flex"><ul class="nav justify-content-end">';
-                    echo '<li class="nav-item"><a class="nav-link" href="assign_book_to_user">Book Borrowing |</a></li> ';
-                    echo '</ul>';
-                    echo '<ul>';
-                    echo '<li class="nav-item"><a class="nav-link" href="borrowed_books">Borrowed Book List |</a></li> ';
-                    echo '<li class="nav-item"><a class="nav-link" href="book_list">Book List |</a></li> ';
-                    echo '<li class="nav-item"><a class="nav-link" href="user_list">User List |</a></li> ';
-                    echo '</ul>';
-                    echo '<ul>';
-                    echo '<li class="nav-item"><a class="nav-link active" href="register_user.php">Add New User |</a></li> ';
-                    echo '<li class="nav-item"><a class="nav-link active" href="create_book.php">Add New Book |</a></li> ';
-                    echo '<li class="nav-item"><a class="nav-link" href="../../src/admin/admin_logout.php">Log Out |</a></li>';
-                    echo '</ul></navbar>';
+                echo '<nav class="col-12 col-md-6 mt-2 text-end d-flex">';
+                echo '  <div class="container-fluid">';
+                echo '    <div class="navbar mt-2">';
+                echo '      <ul class="list-unstyled">';
+                echo '        <li class="nav-item"><a class="nav-link" href="assign_book_to_user">Book Borrowing</a></li>';
+                echo '      </ul>';
+                echo '      <!-- Listings Dropdown -->';
+                echo '      <ul class="list-unstyled">';
+                echo '        <li class="nav-item dropdown">';
+                echo '          <a class="nav-link dropdown-toggle" href="#" id="listingsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">';
+                echo '            Listings';
+                echo '          </a>';
+                echo '          <ul class="dropdown-menu" aria-labelledby="listingsDropdown">';
+                echo '            <li><a class="dropdown-item" href="borrowed_books">Borrowed Books</a></li>';
+                echo '            <li><a class="dropdown-item" href="book_list">Books</a></li>';
+                echo '            <li><a class="dropdown-item" href="user_list">Users</a></li>';
+                echo '          </ul>';
+                echo '        </li>';
+                echo '      </ul>';
+                echo '      <!-- Create Dropdown -->';
+                echo '      <ul class="list-unstyled">';
+                echo '        <li class="nav-item dropdown">';
+                echo '          <a class="nav-link dropdown-toggle" href="#" id="createDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">';
+                echo '            Create';
+                echo '          </a>';
+                echo '          <ul class="dropdown-menu list-unstyled" aria-labelledby="createDropdown">';
+                echo '            <li><a class="dropdown-item" href="register_user.php">New User</a></li>';
+                echo '            <li><a class="dropdown-item" href="create_book.php">New Book</a></li>';
+                echo '          </ul>';
+                echo '        </li>';
+                echo '      </ul>';
+                echo '      <ul class="list-unstyled">';
+                echo '        <li class="nav-item"><a class="nav-link" href="../../src/admin/admin_logout.php">Log Out</a></li>';
+                echo '      </ul>';
+                echo '    </div>';
+                echo '  </div>';
+                echo '</nav>';
                 }
             ?>
 
