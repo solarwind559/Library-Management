@@ -15,7 +15,7 @@ h1 {
 
 .user-button,
 .book-button {
-    height: 50px;
+    min-height: 50px;
     border-radius: 0;
     &:focus {
         box-shadow: none !important;

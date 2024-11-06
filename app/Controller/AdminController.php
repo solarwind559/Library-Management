@@ -1,6 +1,6 @@
 <?php
 
-include_once('../../config/db.php'); // Include the database connection
+include_once(__DIR__ . '/../../config/db.php'); // Include the database connection
 
 class AdminController {
     private $conn; // Database connection

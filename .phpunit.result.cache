@@ -1,0 +1,1 @@
+{"version":1,"defects":{"BookControllerTest::test_showBorrowedBooks":8,"BookControllerTest::test_if_shows_borrowed_books":8},"times":{"BookControllerTest::test_showBorrowedBooks":0.023,"BookControllerTest::test_if_shows_borrowed_books":0.082}}

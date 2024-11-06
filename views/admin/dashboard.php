@@ -11,8 +11,10 @@ if (!isset($_SESSION['admin_id'])) {
   
 $page_title = "Librarian Dashboard";
 include_once('header.php');
-include_once('../../app/Controller/UserController.php');
-include_once('../../app/Controller/BookController.php');
+include_once(__DIR__ . '/../../app/Controller/UserController.php');
+include_once(__DIR__ . '/../../app/Controller/BookController.php');
+use App\Controllers\BookController;
+
 
 // get database connection
 $database = new Database();

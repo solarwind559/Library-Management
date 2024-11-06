@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Controllers;
+
 class BookController{
     private $conn; // Database connection    private $conn;
     private $table_name = "borrowed_books";
@@ -115,6 +118,10 @@ class BookController{
             $this->conn->rollBack();
             return false;
         }
+    }
+
+    public function setStatement($stmt) {
+        $this->stmt = $stmt;
     }
     
 }

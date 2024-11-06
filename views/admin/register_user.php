@@ -1,8 +1,8 @@
 <?php
 $page_title = "Register a new Library User";
 include_once('header.php');
-include_once('../../app/Controller/UserController.php');
-include_once('../../config/db.php');
+include_once(__DIR__ . '/../../app/Controller/UserController.php');
+include_once(__DIR__ . '/../../config/db.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];

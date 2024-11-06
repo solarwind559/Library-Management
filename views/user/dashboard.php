@@ -11,8 +11,12 @@ if (!isset($_SESSION['user_id'])) {
 
 $page_title = "Student Dashboard";
 include_once('header.php');
-include_once('../../app/Controller/UserController.php');
-include_once('../../app/Controller/BookController.php');
+include_once(__DIR__ . '/../../app/Controller/UserController.php');
+include_once(__DIR__ . '/../../app/Controller/BookController.php');
+use App\Controllers\BookController;
+
+//include_once('../../app/Controller/UserController.php');
+//include_once('../../app/Controller/BookController.php');
 
 // get database connection
 $database = new Database();
@@ -64,7 +68,27 @@ if (isset($_SESSION['user_id'])){
 if ($stmt->rowCount() > 0) {
 
     $currentDate = date('Y-m-d');
-                
+    $overdueCount = 0;
+
+    // First loop to count overdue books
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        if ($_SESSION['user_id'] === $row['user_id'] && $row['return_date'] <= $currentDate) {
+            $overdueCount++;
+        }
+    }
+
+    // Display the overdue message before the table
+    if ($overdueCount > 0) {
+        if ($overdueCount == 1) {
+            echo "<div class='alert alert-danger mt-3' role='alert'>You have 1 overdue book. Please return it to the library as soon as possible. Thank you!</div>";
+        } else {
+            echo "<div class='alert alert-danger mt-3' role='alert'>You have $overdueCount overdue books. Please return them to the library as soon as possible. Thank you!</div>";
+        }
+    }
+
+    // Reset the statement cursor for the second loop
+    $stmt->execute();
+
     echo "<table class='table mt-4'>";
         echo "<tr>";
         echo "<th class='table-dark'>Book Names</th>";
@@ -72,14 +96,9 @@ if ($stmt->rowCount() > 0) {
         echo "<th class='table-dark'>Return Date</th>";
         echo "</tr>";
 
+        // Second loop to display the table
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-            //check if session user_id matches the user_id for user who borrowed books
-
             if ($_SESSION['user_id'] === $row['user_id']) {
-
-                // check if current date has not passed
-
                 if ($row['return_date'] > $currentDate) { 
                     echo "<tr>";
                     echo "<td>" . $row['book_name'] . "</td>";
@@ -92,12 +111,6 @@ if ($stmt->rowCount() > 0) {
                     echo "<td>" . $row['borrow_date'] . "</td>";
                     echo "<td>" . $row['return_date'] . " | <b>BOOK OVERDUE</b></td>";
                     echo "</tr>";
-                    // echo messages to the user
-                    if ($row['borrow_date'] = 1) {
-                        echo "<div class='alert alert-danger mt-3' role='alert'>You have 1 overdue book. Please return it to the library as soon as possible. Thank you!</div>";
-                    } else if ($row['borrow_date'] > 1) {
-                        echo "<div class='alert alert-danger' role='alert'>You have overdue books. Please return them to the library as soon as possible. Thank you!</div>";
-                    }
                 }
             }
         }
@@ -105,6 +118,7 @@ if ($stmt->rowCount() > 0) {
 }
 
 ?>
+
 
 </div>
 

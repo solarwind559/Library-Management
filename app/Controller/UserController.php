@@ -1,6 +1,8 @@
 <?php
 
-include_once('../../config/db.php');
+//include_once('../../config/db.php');
+include_once(__DIR__ . '/../../config/db.php');
+
 
 class UserController {
     private $conn;
@@ -9,6 +11,10 @@ class UserController {
     public $surname;
     public $email;
     public $password;
+    public $id;
+    public $borrow_id;
+    public $book_names;
+
 
     public function __construct($db) {
         $this->conn = $db;

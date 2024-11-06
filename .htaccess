@@ -1,12 +1,15 @@
 RewriteEngine On
 
-# If the request is for /admin/ or /admin (with or without trailing slash)
-# RewriteRule ^admin/?$ views/admin/dashboard.php [L]
-
-# If the request is for /admin/anything or /admin/anything/ (e.g., /admin/dashboard)
-# RewriteRule ^admin/(.*)$ views/admin/$1.php [L]
-
 # If the request is for any other file or directory, append .php
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)$ $1.php [L]
+
+
+# Rewrite /views/admin/ to /admin/
+RewriteCond %{REQUEST_URI} ^/admin/
+RewriteRule ^admin/(.*)$ views/admin/$1 [L]
+
+# Rewrite /views/user/ to /user/
+RewriteCond %{REQUEST_URI} ^/user/
+RewriteRule ^user/(.*)$ views/user/$1 [L]

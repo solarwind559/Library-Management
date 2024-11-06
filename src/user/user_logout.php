@@ -11,8 +11,7 @@ $_SESSION = array();
 session_destroy();
 
 // Redirect to the login page (adjust the URL as needed)
-// header('Location: /library-management/admin/admin_login.php');
-header('Location: ../../views/user/login');
+header('Location: /user/login');
 
 exit();
 ?>

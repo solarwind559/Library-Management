@@ -2,7 +2,7 @@
 $page_title = "View user Info";
 
 include_once('header.php');
-include_once('../../app/Controller/UserController.php');
+include_once(__DIR__ . '/../../app/Controller/UserController.php');
 
 $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
 

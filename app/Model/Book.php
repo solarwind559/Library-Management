@@ -32,7 +32,7 @@ class Book{
         $this->title=htmlspecialchars(strip_tags($this->title));
         $this->author=htmlspecialchars(strip_tags($this->author));
         $this->category_id=htmlspecialchars(strip_tags($this->category_id));
-        $this->status=htmlspecialchars(strip_tags($this->status));
+        $this->status=htmlspecialchars(strip_tags($this->status ?? ''));
 
   
         // to get time-stamp for 'created' field

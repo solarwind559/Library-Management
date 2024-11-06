@@ -1,6 +1,7 @@
 <?php
-include_once('../../config/db.php');
-include_once('../../app/Controller/BookController.php');
+include_once(__DIR__ . '/../../config/db.php');
+include_once(__DIR__ . '/../../app/Controller/BookController.php');
+use App\Controllers\BookController;
 
 $database = new Database();
 $db = $database->getConnection();
@@ -11,14 +12,14 @@ if (isset($_POST['book_id'])) {
     // Create an instance of BookController
     $bookController = new BookController($db);
 
+    // Start output buffering
+    ob_start();
+
     // Call the returnBook function
     if ($bookController->returnBook($book_id)) {
         echo "<div class='alert alert-success' role='alert'>
         Book was returned successfully.
     </div>";
-        // header("Location: {$_SERVER['HTTP_REFERER']}");
-        // header("Location: {$_SERVER['HTTP_REFERER']}?success=1");
-
         // Redirect to a success page or any other desired URL
         $redirectUrl = $_SERVER['HTTP_REFERER'] . '?success=1'; // Example: Redirect back to the referring page
         header("Location: $redirectUrl");
@@ -26,5 +27,8 @@ if (isset($_POST['book_id'])) {
     } else {
         echo "Error while returning the book.";
     }
+
+    // End output buffering and flush the output
+    ob_end_flush();
 }
 ?>

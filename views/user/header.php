@@ -12,9 +12,12 @@
 
 <?php
 
-include_once('../../config/db.php');
-include_once('../../app/Model/Book.php');
-include_once('../../app/Model/Category.php');
+include_once(__DIR__ . '/../../config/db.php');
+
+include_once(__DIR__ . '/../../app/Model/Book.php');
+
+include_once(__DIR__ . '/../../app/Model/Category.php');
+
 
 $currentFile = basename($_SERVER['PHP_SELF']);
 
@@ -23,15 +26,15 @@ $currentFile = basename($_SERVER['PHP_SELF']);
 <header style="">
     <div class="container">
         <div class="row">
-            <div class="col-6 py-3 my-auto">
+            <div class="col-12 col-md-6 py-3 my-auto">
                 <a href="dashboard"><img src="../../public/assets/img/Book_blue.svg" alt="logo"></a>             
             </div>
             <?php
                 $currentFile = basename($_SERVER['PHP_SELF']);
                 if ($currentFile !== 'login.php') {
-                    echo '<navbar class="col-6 mt-2 text-end d-flex justify-content-end"><ul class="nav">';
-                    echo '<li class="nav-item"><a class="nav-link" href="book_list.php">Book List |</a></li> ';
-                    echo '<li class="nav-item"><a class="nav-link" href="../../src/user/user_logout.php">Log Out |</a></li>';
+                    echo '<navbar class="col-12 col-md-6 mt-2 text-end d-flex justify-content-end"><ul class="nav">';
+                    echo '<li class="nav-item"><a class="nav-link" href="book_list">Book List |</a></li> ';
+                    echo '<li class="nav-item"><a class="nav-link" href="../../src/user/user_logout">Log Out |</a></li>';
                     echo '</ul></navbar>';
                 }
             ?>

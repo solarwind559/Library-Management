@@ -18,9 +18,9 @@ $from_record_num = ($records_per_page * $page) - $records_per_page;
 $page_title = "Book Borrowing";
 
 include_once('header.php');
-include_once('../../app/Controller/BookController.php');
-include_once('../../app/Controller/UserController.php');
-// include_once '../../src/admin/return_book.php';
+include_once(__DIR__ . '/../../app/Controller/UserController.php');
+include_once(__DIR__ . '/../../app/Controller/BookController.php');
+use App\Controllers\BookController;
 
 $database = new Database();
 $db = $database->getConnection();

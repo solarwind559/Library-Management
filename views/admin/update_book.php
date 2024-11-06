@@ -1,6 +1,8 @@
 <?php
 $page_title = "Edit Book Info";
 include_once('header.php');
+include_once(__DIR__ . '/../../app/Controller/BookController.php');
+
 // get ID of the book to be edited
 $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
 
@@ -18,15 +20,6 @@ $book->id = $id;
 // read the details of book to be edited
 $book->readOne(); 
 
-?>
-<?php
-    // Check if the HTTP_REFERER is set
-    if (isset($_SERVER['HTTP_REFERER'])) {
-        $referrer = $_SERVER['HTTP_REFERER'];
-        echo '<a href="' . $referrer . '"><button class="btn btn-primary">Go Back</button></a><br><br>';
-    } else {
-        echo 'No referrer found.';
-    }
 ?>
 
 <?php 

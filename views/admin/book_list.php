@@ -21,7 +21,7 @@ $from_record_num = ($records_per_page * $page) - $records_per_page;
 $page_title = "Browse Books";
 include_once('header.php');
 
-include_once '../../src/admin/delete_book.php';
+include_once (__DIR__ . '/../../src/admin/delete_book.php');
 
 // get database connection
 $database = new Database();
