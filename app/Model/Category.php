@@ -40,12 +40,10 @@ class Category{
     
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        // $this->name = $row['name'];
         if ($row['name'] !== null) {
             $this->name = $row['name'];
         } else {
-            // Handle the case when the 'name' column is NULL
-            // For example, you can assign a default value or display an error message
+            // Show when the 'name' column is NULL
             $this->name = 'Unknown';
         }
     }

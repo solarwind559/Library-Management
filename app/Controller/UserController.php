@@ -107,9 +107,6 @@ class UserController {
             $stmt->bindParam(1, $this->id);
             $stmt->execute();
 
-
-
-
             //working code:        
             $row = $stmt->fetch(PDO::FETCH_ASSOC); //delete as experiment
 
@@ -159,7 +156,6 @@ class UserController {
               
         }
 
-
         public static function validateEmail($email) {
             return filter_var($email, FILTER_VALIDATE_EMAIL);
         }
@@ -186,11 +182,10 @@ class UserController {
             session_start();
             session_unset();
             session_destroy();
-            // Redirect to the login page (adjust the URL as needed)
+            // Redirect to the login page
             header('Location: login.php');
             exit();
         }
-
     
 }
 

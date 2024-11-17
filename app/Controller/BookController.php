@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 class BookController{
-    private $conn; // Database connection    private $conn;
+    private $conn; // Database connection
     private $table_name = "borrowed_books";
     public $user_id;
     public $book_id;
@@ -13,20 +13,6 @@ class BookController{
     }
 
     public function showBorrowedBooks(){
-        $query = 
-        // "SELECT
-        //             borrow_id, book_id, user_id, borrow_date, return_date
-        //         FROM
-        //             " . $this->table_name . "
-        //         ORDER BY
-        //             book_id ASC
-        //         LIMIT
-        //             10";
-
-        // "SELECT borrowed_books.*, CONCAT(users.name, ' ', users.surname) AS full_name, GROUP_CONCAT(books.title SEPARATOR ',<br>') AS book_names, books.title
-        // FROM borrowed_books
-        // JOIN users ON borrowed_books.user_id = users.id
-        // JOIN books ON borrowed_books.book_id = books.id";
 
         $query = 
         "SELECT
@@ -48,11 +34,6 @@ class BookController{
         return $stmt;
 
         $this->title = $row['title'];
-        // $this->surname = $row['surname'];
-        // $this->email = $row['email'];
-        // $this->borrow_id = $row['borrow_id'];
-
-        // $this->book_names = $row['book_names'];
     
     }
 
@@ -78,36 +59,16 @@ class BookController{
         }
     }
 
-    // public function returnBook($book_id){
-    //     try {
-    //         // Delete the borrowed book record from the borrowed_books table
-    //         $delete_query = "DELETE FROM borrowed_books WHERE book_id = ?";
-    //         $stmt_delete = $this->conn->prepare($delete_query);
-    //         $stmt_delete->execute([$book_id]);
-    
-    //         // Update the status of the book in the books table to indicate it's not borrowed
-    //         $update_query = "UPDATE books SET status = 0 WHERE id = ?";
-    //         $stmt_update = $this->conn->prepare($update_query);
-    //         $stmt_update->execute([$book_id]);
-    
-    //         echo "<div class='alert alert-success alert-dismissable'>
-    //             The book has been returned.
-    //         </div><br>";
-    //     } catch (Exception $e) {
-    //         echo "Error returning book: " . $e->getMessage() . "<br>";
-    //     }
-    // }
-
     function returnBook($book_id) {
         try {
             $this->conn->beginTransaction();
     
-            // Step 1: Delete from borrowed_books
+            // Delete from borrowed_books
             $delete_query = "DELETE FROM borrowed_books WHERE book_id = ?";
             $stmt_delete = $this->conn->prepare($delete_query);
             $stmt_delete->execute([$book_id]);
     
-            // Step 2: Update status in books
+            // Update status in books
             $update_query = "UPDATE books SET status = 0 WHERE id = ?";
             $stmt_update = $this->conn->prepare($update_query);
             $stmt_update->execute([$book_id]);

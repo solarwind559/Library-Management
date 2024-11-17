@@ -36,7 +36,7 @@ class AdminController {
         session_start();
         session_unset();
         session_destroy();
-        // Redirect to the login page (adjust the URL as needed)
+        // Redirect to the login page
         header('Location: login.php');
         exit();
     }
