@@ -4,7 +4,7 @@ class Database{
     private $host = "fdb1030.awardspace.net";
     private $db_name = "4513047_library";
     private $username = "4513047_library";
-    private $password = "j8x@xM3eZxNn@Bz";
+    private $password = "x";
     public $conn;
    
     // get the database connection
