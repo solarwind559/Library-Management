@@ -1,10 +1,10 @@
 <?php
 class Database{
    
-    private $host = "fdb1030.awardspace.net";
-    private $db_name = "4513047_library";
-    private $username = "4513047_library";
-    private $password = "x";
+    private $host = "localhost";
+    private $db_name = "library_management";
+    private $username = "root";
+    private $password = "";
     public $conn;
    
     // get the database connection
