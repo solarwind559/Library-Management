@@ -124,7 +124,7 @@ class Book{
         $this->author=htmlspecialchars(strip_tags($this->author));
         $this->category_id=htmlspecialchars(strip_tags($this->category_id));
         $this->id=htmlspecialchars(strip_tags($this->id));
-        $this->id=htmlspecialchars(strip_tags($this->status));
+        $this->status=htmlspecialchars(strip_tags($this->status));
 
       
         // bind parameters
