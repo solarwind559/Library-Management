@@ -20,49 +20,46 @@ $book->id = $id;
 // read the details of book to be edited
 $book->readOne(); 
 
+// if the form was submitted
+if ($_POST) {
+    // Check if the form is for updating book details
+    if (isset($_POST['title'], $_POST['author'], $_POST['category_id'])) {
+        // set book property values
+        $book->title = $_POST['title'];
+        $book->author = $_POST['author'];
+        $book->category_id = $_POST['category_id'];
+
+        // update the book
+        if ($book->update()) {
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            The book information was updated successfully.
+            </div>';
+        } else {
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Unable to update book information.
+            </div>';
+        }
+    }
+
+    // Check if the toggle button was clicked
+    // if (isset($_POST['toggle'])) {
+    //     // Perform toggle action
+    //     if ($book->update()) {
+    //         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    //         The book information was updated successfully.
+    //         </div>';
+    //     } else {
+    //         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    //         Unable to update book information.
+    //         </div>';
+    //     }
+    // }
+}
+
+echo '<a href="book_list"><button class="btn btn-primary">Go Back</button></a><br><br>';
+
 ?>
 
-<?php 
-// if the form was submitted
-if($_POST){
-  
-    // set book property values
-    $book->title = $_POST['title'];
-    $book->author = $_POST['author'];
-    $book->category_id = $_POST['category_id'];
-  
-    // update the book
-    if($book->update()){
-        echo "<div class='alert alert-success alert-dismissable'>
-            The book has been updated.
-        </div>";
-    }
-  
-    // if unable to update the book, tell the user
-    else{
-        echo "<div class='alert alert-danger alert-dismissable'>
-            Unable to update book.
-        </div>";
-    }
-}
-
-
-$status = $book->status; // Example value (replace with your actual value)
-
-// Toggle the value when the button is clicked
-if (isset($_POST['toggle'])) {
-
-    if ($book->update()) {
-        echo "<div class='alert alert-success alert-dismissable'>
-            The book has been updated.
-        </div>";
-    } else {
-        echo "<div class='alert alert-danger alert-dismissable'>
-            Unable to update book.
-        </div>";
-    }
-}
-?>  
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id={$id}");?>" method="post">
         <table class='table table-hover table-responsive table-bordered'>
     
