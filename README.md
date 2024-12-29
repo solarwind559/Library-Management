@@ -28,14 +28,15 @@ http://library-management-sys.atwebpages.com/user/login
 * their status with the library
 
 ## General
+* Books can be searched by title, author and category.
 * There is pagination for lists.
 * Lists can be sorted by name.
 * You can view all books and their current status (available/ borrowed).
 * Once a book is borrowed, if it is not returned within 14 days, a "BOOK OVERDUE" message appears in the dashboard of the student who borrowed the book.
 
 ![librarian login](<__screenshots/Ekrānuzņēmums 2024-04-25 181417.png>) 
-![librarian dashboard](<__screenshots/Ekrānuzņēmums 2024-04-19 185027.png>)
-![librarian dashboard](<__screenshots/Ekrānuzņēmums 2024-04-26 173249.png>) 
+![librarian dashboard](__screenshots/Screenshot_19.png) 
+![librarian dashboard](__screenshots/Screenshot_20.png)
 ![librarian dashboard](<__screenshots/Ekrānuzņēmums 2024-04-25 181052.png>) 
 ![librarian dashboard](<__screenshots/Ekrānuzņēmums 2024-04-25 181110.png>) 
 ![librarian dashboard](<__screenshots/Ekrānuzņēmums 2024-04-25 181134.png>) 
