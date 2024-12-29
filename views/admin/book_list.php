@@ -4,7 +4,6 @@ session_start();
 
 // Check if the user is authenticated
 if (!isset($_SESSION['admin_id'])) {
-    // Redirect to the login page (adjust the URL as needed)
     header('Location: login');
     exit();
 }
@@ -19,10 +18,15 @@ $records_per_page = 7;
 $from_record_num = ($records_per_page * $page) - $records_per_page;
   
 $page_title = "Browse Books";
+
 include_once('header.php');
 
 include_once (__DIR__ . '/../../src/admin/delete_book.php');
 
+if (isset($_SESSION['message'])) {
+    echo $_SESSION['message'];
+    unset($_SESSION['message']);
+}
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
@@ -31,8 +35,16 @@ $db = $database->getConnection();
 $book = new Book($db);
 $category = new Category($db);
 
-// query books
-$stmt = $book->readAll($from_record_num, $records_per_page);
+// search functionality
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+
+// query books: use searchBooks() method if there's a search keyword
+if ($search) { 
+    $stmt = $book->searchBooks($search, $from_record_num, $records_per_page); 
+} else { 
+    $stmt = $book->readAll($from_record_num, $records_per_page); 
+}
+
 $num = $stmt->rowCount();
 
 $sort_column = isset($_GET['sort']) ? $_GET['sort'] : 'title';
@@ -47,10 +59,7 @@ function compare_rows($row1, $row2, $sort_column, $sort_order) {
     }
 }
 
-
-// Assuming you have an array of rows (e.g., fetched from the database)
 $rows = [];  // Initialize an empty array to store the rows
-
 
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $rows[] = $row;  // Append each fetched row to the $rows array
@@ -64,6 +73,14 @@ usort($rows, function ($row1, $row2) use ($sort_column, $sort_order) {
 if ($num > 0) {
         
 	echo "<div class='table-responsive'>";
+
+    // Search box 
+    echo "<form method='GET' action='' class='d-flex mb-2 w-100'>";
+    echo "<input type='text' name='search' value='" . htmlspecialchars($search) . "' placeholder='Search for book title, author or category' class='form-control my-2 me-2'>";
+    echo "<input type='submit' value='Search' class='btn btn-outline-primary my-2'>";
+    echo "</form>";    
+
+    // Book table
     echo "<table class='table table-hover table-bordered' id='categoryTable'>";
     echo "<tr>";
     echo "<th class='table-dark'><a href='?sort=title&order=" . ($sort_column === 'title' ? ($sort_order === 'asc' ? 'desc' : 'asc') : 'asc') . "'>Title &#8593;&#8595;</a></th>";
@@ -78,18 +95,15 @@ if ($num > 0) {
 
         extract($row);  // Extract values from the $row array
         
-        
-
         $status_message = ($row['status'] == 1) ? "<i class='text-danger'>Borrowed</i>" : "<i class='text-success'>Available</i>";
         echo "<tr>";
         echo "<td><a href='read_one.php?id={$row['id']}'>{$row['title']}</a></td>";
         echo "<td>{$row['author']}</td>";
 
-        // category: {
+        // categories
             $category->id = $category_id;
             $category->readName();
-            $name = $category->name;
-            
+            $name = $category->name;  
 
         echo "<td";
             // if ($name === 'Astronomy') {
@@ -110,13 +124,19 @@ if ($num > 0) {
     }
     echo "</table>";
 } else {
+
+    // Search box 
+    echo "<form method='GET' action='' class='d-flex mb-2 w-50'>";
+    echo "<input type='text' name='search' value='" . htmlspecialchars($search) . "' placeholder='Search for book title, author or category' class='form-control mr-sm-2'>";
+    echo "<input type='submit' value='Search' class='btn btn-outline-success my-2 my-sm-0'>";
+    echo "</form>";
+
     echo "No data found in database.";
 }
 
 ?>
 
 <?php
-//$page_url = "dashboard.php?";
 $page_url = "?";
 $total_rows = $book->countAll();
 include_once('../../pagination.php');

@@ -157,5 +157,23 @@ class Book{
             return false;
         }
     }
+
+    public function searchBooks($search, $from_record_num, $records_per_page) { 
+        $query = "SELECT b.id, b.title, b.author, b.category_id, c.name AS category_name, b.status 
+                FROM " . $this->table_name . " b 
+                JOIN categories c ON b.category_id = c.id 
+                WHERE b.title LIKE ? OR b.author LIKE ? OR c.name LIKE ? 
+                ORDER BY b.title ASC 
+                LIMIT ?, ?";
+        $stmt = $this->conn->prepare($query); 
+        $search = "%{$search}%"; 
+        $stmt->bindParam(1, $search, PDO::PARAM_STR); 
+        $stmt->bindParam(2, $search, PDO::PARAM_STR); 
+        $stmt->bindParam(3, $search, PDO::PARAM_STR); 
+        $stmt->bindParam(4, $from_record_num, PDO::PARAM_INT); 
+        $stmt->bindParam(5, $records_per_page, PDO::PARAM_INT); 
+        $stmt->execute(); 
+        return $stmt; 
+    }
 }
 ?>

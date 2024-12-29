@@ -1,4 +1,8 @@
 <?php
+// Is the session already active?
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 include_once(__DIR__ . '/../../config/db.php');
 include_once(__DIR__ . '/../../app/Model/Book.php');
@@ -10,25 +14,20 @@ $book = new Book($db);
 
 if (isset($_GET['id'])) {
     $book->id = $_GET['id'];
-    
-    // Start output buffering
-    ob_start();
 
     if ($book->delete()) {
-        echo "Object was deleted.";
-        echo "<br><a href='dashboard'>Go back</a>";
-        // Redirect to the referring page
-        header("Location: {$_SERVER['HTTP_REFERER']}");
-        exit;
+        $_SESSION['message'] = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        The book was deleted successfully.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
     } else {
-        echo "Unable to delete object.";
-        echo "<br><a href='dashboard'>Go back</a>";
+        $_SESSION['message'] = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        The book could not be deleted.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
     }
 
-    // End output buffering and flush the output
-    ob_end_flush();
-} 
-// else {
-//     echo "Invalid book ID.";
-// }
-?>
+    // Redirect to the referring page
+    header("Location: {$_SERVER['HTTP_REFERER']}");
+    exit;
+}

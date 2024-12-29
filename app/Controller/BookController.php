@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+include_once(__DIR__ . '/../Model/Book.php');
+
+
 class BookController{
     private $conn; // Database connection
     private $table_name = "borrowed_books";
@@ -83,6 +86,11 @@ class BookController{
 
     public function setStatement($stmt) {
         $this->stmt = $stmt;
+    }
+
+    public function searchBooks($keyword) {
+        $books = Book::search($keyword);
+        include 'views/book_list.php';
     }
     
 }
