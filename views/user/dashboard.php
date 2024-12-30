@@ -44,9 +44,9 @@ if (isset($_SESSION['user_id'])){
 
 ?>
 
-<h2 class="mt-5">Welcome, <?php echo $userDetails['name'] ." ". $userDetails['surname']; ?>!</h2>
+<h2 class="mt-3">Welcome, <?php echo $userDetails['name'] ." ". $userDetails['surname']; ?>!</h2>
 
-<div class="py-5 library-info">
+<div class="py-4 library-info">
     <h4 class="">You have checked out <b class="text-danger">
     <?php
         //convert strings to array to echo the number of strings for our book_names
