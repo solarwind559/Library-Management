@@ -1,3 +1,23 @@
+    <div>
+        <hr>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <strong>Contact us</strong>
+                <br>
+                <p>Email: <a href="mailto:library@example.com">library@example.com</a> <br>
+                Phone: <strong>+371 12345678</strong></p>
+            </div>
+            <div class="col-12 col-md-6">
+                <strong>Address</strong>
+                <br>
+                <p>School address line 1 <br>
+                School address line 2 </p>
+            </div>
+        </div>
+
+
+    </div>
+
 </div><!-- ends .container from header.php -->
 
 </body>
