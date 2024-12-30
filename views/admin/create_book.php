@@ -1,5 +1,5 @@
 <?php
-$page_title = "Add Books";
+$page_title = "Add a new book";
 include_once('header.php');
 
 // get database connection

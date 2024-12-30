@@ -1,5 +1,5 @@
 <?php
-$page_title = "Register a new Library User";
+$page_title = "Add a new library user";
 include_once('header.php');
 include_once(__DIR__ . '/../../app/Controller/UserController.php');
 include_once(__DIR__ . '/../../config/db.php');
