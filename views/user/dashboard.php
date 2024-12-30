@@ -119,7 +119,6 @@ if ($stmt->rowCount() > 0) {
 
 ?>
 
-
 </div>
 
 <?php include_once('../partials/footer.php'); ?>

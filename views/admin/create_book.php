@@ -10,10 +10,6 @@ $db = $database->getConnection();
 $book = new Book($db);
 $category = new Category($db);
 
-?>
-
-<?php 
-
 // if the form was submitted
 if($_POST){
   
@@ -24,12 +20,12 @@ if($_POST){
   
     // create the product
     if($book->create()){
-        echo "<div class='alert alert-success'>Product was created.</div>";
+        echo "<div class='alert alert-success'>The book was created.</div>";
     }
   
     // if unable to create the product, tell the user
-    else{
-        echo "<div class='alert alert-danger'>Unable to create product.</div>";
+    else {
+        echo "<div class='alert alert-danger'>Unable to create a new book.</div>";
     }
 }
 ?>
