@@ -31,12 +31,11 @@ $db = $database->getConnection();
 $book = new Book($db);
 $user = new UserController($db);
 
-// $viewBook = $book->readOne();
-
 // query users
 $stmt = $user->viewAll($from_record_num, $records_per_page);
 $num = $stmt->rowCount();
 
+// include sort functionality
 $sort_column = isset($_GET['sort']) ? $_GET['sort'] : 'name';
 $sort_order = isset($_GET['order']) ? $_GET['order'] : 'asc';
 
@@ -81,7 +80,7 @@ if($num>0){
             echo "<tr>";
                 echo "<td>{$name}</td>"; 
                 echo "<td>{$surname}</td>";
-                echo "<td>{$email}</td>";
+                echo "<td><a href='mailto:{$email}'>{$email}</a></td>";
                 echo "<td class='text-center align-middle'>
                 <a href='view_one_user.php?id={$id}' class='btn btn-outline-primary'>View</a> 
                 <a href='update_user.php?id={$id}' class='btn btn-outline-info'>Edit</a>
@@ -102,10 +101,10 @@ if($num>0){
 ?>
 
 <?php
-//$page_url = "dashboard.php?";
 $page_url = "?";
 $total_rows = $user->countAll();
 include_once('../../pagination.php');
+
 //include the script
 include_once('../partials/footer.php');
 ?>

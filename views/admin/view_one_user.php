@@ -47,7 +47,7 @@ echo "<table class='table table-hover table-bordered'>
   
     <tr>
         <th class='col-4'>Email</th>
-        <td class='col-8'>{$user->email}</td>
+        <td class='col-8'><a href='mailto:{$user->email}'>{$user->email}</a></td>
     </tr>
 
     <tr>
