@@ -40,6 +40,25 @@ class BookController{
     
     }
 
+    public function getBorrowerDetails($book_id) {
+        $query = "
+        SELECT
+            users.id AS user_id,
+            CONCAT(users.name, ' ', users.surname) AS full_name
+        FROM
+            borrowed_books
+        JOIN users ON borrowed_books.user_id = users.id
+        WHERE
+            borrowed_books.book_id = ?
+        LIMIT 1";
+    
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([$book_id]);
+    
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+        
+
     public function borrowBook($user_id, $book_id) {
         try {
             // Insert into borrowed_books table and update status in books table

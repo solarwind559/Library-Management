@@ -1,37 +1,39 @@
 <?php
 $page_title = "View Book Info";
+
 include_once('header.php');
+include_once(__DIR__ . '/../../app/Controller/BookController.php');
+use App\Controllers\BookController;
 
 $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
 
+// initialize database and controllers
 $database = new Database();
 $db = $database->getConnection();
-  
 $book = new Book($db);
 $category = new Category($db);
-  
-// set ID property of book to be edited
+$bookController = new BookController($db);
+
+// set book id's and read their details
 $book->id = $id;
-  
-// read the details of book to be edited
 $book->readOne();
+
+// check book status
 $status = $book->status;
 $status_message = ($status == 1) ? "<b style='color:#dc3545;'>Borrowed</b>" : "<b style='color:#198754;'>Available</b>";
 
-?>
+// get book borrower details if book is borrowed
+$borrowerDetails = $status == 1 ? $bookController->getBorrowerDetails($book->id) : null;
 
-<?php
-    // Check if the HTTP_REFERER is set
-    if (isset($_SERVER['HTTP_REFERER'])) {
-        $referrer = $_SERVER['HTTP_REFERER'];
-        echo '<a href="' . $referrer . '"><button class="btn btn-primary">Go Back</button></a><br><br>';
-    } else {
-        echo 'No referrer found.';
-    }
-?>
+// display go back button
+if (isset($_SERVER['HTTP_REFERER'])) {
+    $referrer = $_SERVER['HTTP_REFERER'];
+    echo '<a href="' . $referrer . '"><button class="btn btn-primary">Go Back</button></a><br><br>';
+} else {
+    echo 'No referrer found.';
+}
 
-<?php
-
+// display the table with data
 echo "<table class='table table-hover table-bordered'>
   
     <tr>
@@ -57,8 +59,16 @@ echo "<table class='table table-hover table-bordered'>
         <th class='col-4'>Book Status</th>
         <td class='col-8'>";
             echo $status_message;
-       "<td>
+            if ($borrowerDetails) {
+                $userId = $borrowerDetails['user_id'];
+                echo ' (by 
+                <a href="view_one_user.php?id=' . $userId . '">
+                    <strong>' . $borrowerDetails["full_name"] . '</strong>)
+                </a>';
+            }
+        "<td>
     </tr>
 
 </table>";
 ?>
+
